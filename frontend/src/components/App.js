@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { DataProvider } from '../context/DataContext';
 import MyComponent from './MyComponent';
-import {createRoot} from "react-dom/client";
+import { createRoot } from 'react-dom/client';
+
 
 const App = () => {
   return (
