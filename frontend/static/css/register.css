@@ -1,0 +1,64 @@
+/* Register.css */
+
+.register-container {
+  display: flex; /* Center the form horizontally */
+  flex-direction: column; /* Arrange elements vertically */
+  align-items: center; /* Center the form horizontally */
+  width: 400px; /* Adjust width as needed */
+  margin: 50px auto; /* Add spacing around the form */
+  padding: 20px; /* Add padding for better visual appearance */
+  border: 1px solid #ccc; /* Add a subtle border */
+  border-radius: 10px; /* Add rounded corners */
+}
+
+h2 {
+  text-align: center; /* Center the heading */
+  margin-bottom: 20px; /* Add spacing below the heading */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Add spacing between form fields */
+  display: flex; /* Arrange label and input in a row */
+  align-items: center; /* Align label and input vertically */
+}
+
+label {
+  display: block; /* Make label take up the full width */
+  width: 100px; /* Adjust label width as needed */
+  margin-right: 10px; /* Add spacing between label and input */
+  font-weight: bold; /* Make label text bold */
+}
+
+.form-control {
+  flex: 1; /* Make input field expand to fill available space */
+  padding: 5px; /* Add padding for better visual appearance */
+  border: 1px solid #ccc; /* Add a subtle border */
+  border-radius: 5px; /* Add rounded corners */
+  font-size: 14px; /* Adjust font size as needed */
+}
+
+.btn {
+  padding: 10px 20px; /* Add padding for better visual appearance */
+  border: none; /* Remove default button border */
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Indicate that it's a clickable button */
+}
+
+.btn-success {
+  background-color: #4CAF50; /* Green color for success */
+  color: white; /* White text color for contrast */
+}
+
+.btn:disabled {
+  opacity: 0.5; /* Reduce opacity to indicate disabled state */
+  cursor: default; /* Remove pointer cursor */
+}
+
+.register-header {
+  width: max-content;
+}
+
+.logotype {
+  display: flex;
+
+}
