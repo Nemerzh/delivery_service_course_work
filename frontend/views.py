@@ -8,3 +8,7 @@ def index(request, *args, **kwargs):
 
 def index1(request, *args, **kwargs):
     return render(request, 'frontend/index.html')
+
+def index2(request, *args, **kwargs):
+    return render(request, 'frontend/feedback.html')
+

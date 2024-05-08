@@ -24,17 +24,20 @@ export default function Navbar(props) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-            <li className='nav-item'><NavLink className={'nav-link'} to={'/'}>Home</NavLink></li>
-            {isLoggedIn ? (
-                <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/user'}>User</NavLink></li>
-            ) : (
-                <>
-                    <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/login'}>Login</NavLink></li>
-                    <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/register'}>Register</NavLink></li>
-                </>
-            )}
-        </ul>
+            <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+                <li className='nav-item'><NavLink className={'nav-link'} to={'/'}>Home</NavLink></li>
+
+
+                {isLoggedIn ? (
+                    <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/user'}>User</NavLink></li>
+                ) : (
+                    <>
+                        <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/login'}>Login</NavLink></li>
+                        <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/register'}>Register</NavLink></li>
+                        <li className='nav-item'><NavLink className={'nav-link'} to={'/feedback/list'}>Feedback</NavLink></li>
+                    </>
+                )}
+            </ul>
         </div>
       </div>
     </nav>

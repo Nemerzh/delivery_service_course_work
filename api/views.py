@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from api.serializers import CategorySerializer, UserSerializer
+from api.serializers import CategorySerializer, UserSerializer, FeedbackSerializer
 
-from api.models import Category, User
+from api.models import Category, User, Feedback
 
 from django.contrib.auth import authenticate
 from django.conf import settings
@@ -150,3 +150,13 @@ class UserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated & permissions.IsAdminUser]
+
+
+class FeedbackView(generics.ListCreateAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+
+
+class LastFiveFeedbacksView(generics.ListAPIView):
+    queryset = Feedback.objects.order_by('-review_date')[:5]
+    serializer_class = FeedbackSerializer
