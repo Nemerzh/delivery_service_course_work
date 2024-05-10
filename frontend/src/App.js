@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import FeedbackPage from "./pages/feedback/FeedbackPage";
 import FeedbackAdd from "./pages/feedback/FeedbackAdd";
 
+
 function App() {
   const location = useLocation();
   let isNavbarVisible = true;
@@ -40,6 +41,8 @@ function App() {
 
         <Route path='*' element={<Navigate to='/' />}></Route>
       </Routes>
+      <Footer visible={isNavbarVisible}/>
+
     </div>
   );
 }

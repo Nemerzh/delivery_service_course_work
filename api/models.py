@@ -87,6 +87,9 @@ class Feedback(models.Model):
     rating = models.FloatField()
     review_date = models.DateTimeField()
 
+    def __str__(self):
+        return self.user.user.first_name
+
 
 class Courier(models.Model):
     user = models.OneToOneField('User', on_delete=models.CASCADE)
@@ -95,6 +98,9 @@ class Courier(models.Model):
 class Customer(models.Model):
     user = models.OneToOneField('User', on_delete=models.CASCADE)
     delivery_address = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.user.email
 
 
 class Admin(models.Model):
