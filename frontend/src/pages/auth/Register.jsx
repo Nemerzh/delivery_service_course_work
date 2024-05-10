@@ -8,6 +8,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HttpsIcon from '@mui/icons-material/Https';
 
+
 export default function Register() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)

@@ -42,6 +42,7 @@ export default function Login() {
             setLoading(false)
 
             navigate(fromLocation, {replace: true})
+
         } catch (error) {
             setLoading(false)
 
