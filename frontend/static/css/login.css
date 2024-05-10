@@ -1,39 +1,31 @@
-.sign-up-form-label {
+.logotype {
+  display: flex;
+  width: 150px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.login-form-label {
   text-align: center; /* Center the heading */
-  margin-top: 20px; /* Add spacing below the heading */
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
-.param-field {
-  flex: 1; /* Make input field expand to fill available space */
-  padding: 5px; /* Add padding for better visual appearance */
-  width: 330px;
-  border: none;
-  border-radius: 0 10px 10px 0; /* Add rounded corners */
-  font-size: 14px; /* Adjust font size as needed */
-}
-
-.sign-up-btn {
+.login-btn {
   padding: 10px 20px; /* Add padding for better visual appearance */
   border: none; /* Remove default button border */
   background: #D9D9D9;
   font-size: 20px;
   width: 190px;
   font-weight: 500;
+  margin-top: 50px;
   border-radius: 5px; /* Add rounded corners */
-  cursor: pointer; /* Indicate that it's a clickable button */
   transition: transform .4s;
 }
 
-.sign-up-btn:hover {
+.login-btn:hover {
   background: #d1d1d1;
   transform: scale(1.05);
-}
-
-.logotype {
-  display: flex;
-  width: 150px;
-  margin-bottom: 20px;
-  margin-top: 20px;
 }
 
 .container {
@@ -48,18 +40,22 @@ form {
   align-items: center;
 }
 
-.sign-up-param {
+.login-container {
+  width: 500px;
+  height: 400px;
+  background: #BABABA;
+  border-radius: 10px;
+}
+
+.login-param {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 }
 
-.sign-up-container {
-  width: 500px;
-  height: 530px;
-  background: #BABABA;
-  border-radius: 10px;
+.login-param-container {
+  display: flex;
 }
 
 #root {
@@ -77,6 +73,11 @@ form {
   border-radius: 10px 0 0 10px;
 }
 
-.sign-up-param-container {
-  display: flex;
+.param-field {
+  flex: 1; /* Make input field expand to fill available space */
+  padding: 5px; /* Add padding for better visual appearance */
+  width: 330px;
+  border: none;
+  border-radius: 0 10px 10px 0; /* Add rounded corners */
+  font-size: 14px; /* Adjust font size as needed */
 }

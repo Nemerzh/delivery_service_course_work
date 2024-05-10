@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import User from './pages/auth/User';
 import PersistLogin from './components/PersistLogin';
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,8 @@ function App() {
         </Route>
         <Route path='*' element={<Navigate to='/' />}></Route>
       </Routes>
+      <Footer visible={isNavbarVisible}/>
+
     </div>
   );
 }

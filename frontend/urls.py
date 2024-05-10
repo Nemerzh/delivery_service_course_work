@@ -1,11 +1,10 @@
 from django.urls import path
-from .views import index, index1
+from .views import index, register, login
 
 urlpatterns = [
     path('', index),
-    path('/', index),
-    path('auth/login', index),
-    path('auth/register', index),
-    path('auth/user', index1),
+    path('auth/login', login),
+    path('auth/register', register),
+    path('auth/user', index),
     path('auth/logout', index),
 ]
