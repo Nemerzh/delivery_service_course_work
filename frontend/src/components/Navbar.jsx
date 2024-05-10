@@ -32,7 +32,7 @@ export default function Navbar(props) {
                             <a href="">Меню</a>
                         </li>
                         <li>
-                            <a href="">Відгуки</a>
+                            <a href="/feedback/list">Відгуки</a>
                         </li>
                         <li>
                             <a href="">Історія замовлень</a>

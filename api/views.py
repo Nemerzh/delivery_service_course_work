@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from api.serializers import CategorySerializer, UserSerializer
+from api.serializers import CategorySerializer, UserSerializer, FeedbackSerializer
 
-from api.models import Category, User
+from api.models import Category, User, Feedback
 
 from django.contrib.auth import authenticate
 from django.conf import settings
@@ -150,3 +150,30 @@ class UserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated & permissions.IsAdminUser]
+
+
+class FeedbackView(generics.ListCreateAPIView):
+    queryset = Feedback.objects.all()
+    serializer_class = FeedbackSerializer
+
+
+from rest_framework import generics
+from .models import Feedback
+from .serializers import FeedbackSerializer
+
+
+class LastFiveFeedbacksView(generics.ListAPIView):
+    serializer_class = FeedbackSerializer
+
+    def get_queryset(self):
+        # Получаем параметр max_id из запроса
+        max_id = self.request.query_params.get('max_id')
+
+        if max_id is not None:
+            # Фильтруем комментарии, id которых меньше max_id
+            queryset = Feedback.objects.filter(id__lt=max_id).order_by('-id')[:1]
+        else:
+            # Загружаем последние комментарии по id, если max_id не указан
+            queryset = Feedback.objects.order_by('-id')[:1]
+
+        return queryset

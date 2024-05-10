@@ -1,0 +1,162 @@
+/* feedback.css */
+.feedback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px;
+    width: 60%;
+    height: 100%;
+    background-color: #BABABA;
+
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5), -5px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.feedback-page {
+    background-color: #DDDBDB;
+    height: 100vh;
+}
+
+
+.feedback-container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 40%;
+    height: 60%;
+    background-color: #BABABA;
+
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.5), -5px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.feedback-page2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+h2 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.add-comment-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 6%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #FFFF;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+
+    color: black;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+hr {
+    width: 70%;
+    margin: 10px auto;
+    border: none;
+    height: 2px;
+    background-color: black;
+}
+
+.comment-cell {
+    border: 1px solid #000;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 70%;
+    background-color: #FFFF;
+}
+
+.comment-header {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.comment-text {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.comment-cell hr {
+    margin: 5px 0;
+    border: none;
+    height: 3px;
+    background-color: black;
+    width: 100%;
+}
+
+.load-more-button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #666666;
+    color: white;
+    width: 15%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.feedback-textarea {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    font-size: 16px;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+input[type="radio"] {
+  display: none;
+}
+.star {
+  cursor: pointer;
+  font-size: 4rem;
+  margin: 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+    margin-top: 30px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #666666;
+    width: 30%;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #000;
+    color: #FFFFFF;
+}
