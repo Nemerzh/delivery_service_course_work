@@ -3,6 +3,10 @@ import {useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {axiosInstance} from '../../api/apiConfig'
 import useAuth from "../../hooks/useAuth"
+import PersonIcon from '@mui/icons-material/Person';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
+import HttpsIcon from '@mui/icons-material/Https';
 
 export default function Register() {
     const navigate = useNavigate()
@@ -45,86 +49,112 @@ export default function Register() {
             <a href="/">
                 <img src="/../static/images/5.png" className="logotype" alt="logotype"/>
             </a>
-            <h2>Register</h2>
-            <form onSubmit={onSubmitForm}>
-                <div className="mb-3">
-                    <label htmlFor="first_name" className="register-header">First Name</label>
-                    <input
-                        type="text"
-                        placeholder="First Name"
-                        autoComplete="off"
-                        className="form-control"
-                        id="first_name"
-                        ref={first_name}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="last_name" className="register-header">Last Name</label>
-                    <input
-                        type="text"
-                        placeholder="Last Name"
-                        autoComplete="off"
-                        className="form-control"
-                        id="last_name"
-                        ref={last_name}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="register-header">Email</label>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        autoComplete="off"
-                        className="form-control"
-                        id="email"
-                        ref={email}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="phone_number" className="register-header">Phone number</label>
-                    <input
-                        type="text"
-                        placeholder="Phone number"
-                        autoComplete="off"
-                        className="form-control"
-                        id="phone_number"
-                        ref={phone_number}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="register-header">Password</label>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        autoComplete="off"
-                        className="form-control"
-                        id="password"
-                        ref={password}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="passwordConfirmation" className="register-header">Confirm Password</label>
-                    <input
-                        type="password"
-                        placeholder="Confirm Password"
-                        autoComplete="off"
-                        className="form-control"
-                        id="passwordConfirmation"
-                        ref={password2}
-                        required
-                    />
-                </div>
-                <div className="mb-3">
-                    <button disabled={loading} className="btn btn-success" type="submit">
-                        {loading ? 'Loading...' : 'Register'}
-                    </button>
-                </div>
-            </form>
+            <div className="sign-up-container">
+                <h3 className="sign-up-form-label">Create your account</h3>
+                <form onSubmit={onSubmitForm}>
+                    <div className="sign-up-param">
+                        <div className="sign-up-param-container">
+                            <div className="icons">
+                                <PersonIcon style={{width: '30px', height: '30px'}}/>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                autoComplete="off"
+                                className="param-field"
+                                id="first_name"
+                                ref={first_name}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="sign-up-param">
+                        <div className="sign-up-param-container">
+                            <div className="icons">
+                                <PersonIcon style={{width: '30px', height: '30px'}}/>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                autoComplete="off"
+                                className="param-field"
+                                id="last_name"
+                                ref={last_name}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="sign-up-param">
+                        <div className="sign-up-param-container">
+                            <div className="icons">
+                                <MailOutlineIcon style={{width: '30px', height: '30px'}}/>
+                            </div>
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                autoComplete="off"
+                                className="param-field"
+                                id="email"
+                                ref={email}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="sign-up-param">
+                        <div className="sign-up-param-container">
+                            <div className="icons">
+                                <PhoneIcon style={{width: '30px', height: '30px'}}/>
+                            </div>
+                            <input
+                                type="text"
+                                placeholder="Phone number"
+                                autoComplete="off"
+                                className="param-field"
+                                id="phone_number"
+                                ref={phone_number}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="sign-up-param">
+                        <div className="sign-up-param-container">
+                            <div className="icons">
+                                <HttpsIcon style={{width: '30px', height: '30px'}}/>
+                            </div>
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                autoComplete="off"
+                                className="param-field"
+                                id="password"
+                                ref={password}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="sign-up-param">
+                        <div className="sign-up-param-container">
+                            <div className="icons">
+                                <HttpsIcon style={{width: '30px', height: '30px'}}/>
+                            </div>
+                            <input
+                                type="password"
+                                placeholder="Confirm Password"
+                                autoComplete="off"
+                                className="param-field"
+                                id="passwordConfirmation"
+                                ref={password2}
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className="sign-up-param">
+                        <button disabled={loading} className="sign-up-btn" type="submit">
+                            Sign up
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

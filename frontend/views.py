@@ -6,5 +6,9 @@ def index(request, *args, **kwargs):
     return render(request, 'frontend/index.html')
 
 
-def index1(request, *args, **kwargs):
-    return render(request, 'frontend/index.html')
+def register(request, *args, **kwargs):
+    return render(request, 'frontend/register.html')
+
+
+def login(request, *args, **kwargs):
+    return render(request, 'frontend/login.html')
