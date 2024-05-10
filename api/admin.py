@@ -9,4 +9,6 @@ admin.site.register(Admin)
 admin.site.register(User)
 admin.site.register(Customer)
 admin.site.register(Courier)
+admin.site.register(Feedback)
+
 
