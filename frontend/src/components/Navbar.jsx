@@ -33,10 +33,11 @@ export default function Navbar(props) {
                 ) : (
                     <>
                         <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/login'}>Login</NavLink></li>
-                        <li className='nav-item'><NavLink className={'nav-link'} to={'/auth/register'}>Register</NavLink></li>
-                        <li className='nav-item'><NavLink className={'nav-link'} to={'/feedback/list'}>Feedback</NavLink></li>
+                        <li className='nav-item'><NavLink className={'nav-link'}
+                                                          to={'/auth/register'}>Register</NavLink></li>
                     </>
                 )}
+                <li className='nav-item'><NavLink className={'nav-link'} to={'/feedback/list'}>Feedback</NavLink></li>
             </ul>
         </div>
       </div>

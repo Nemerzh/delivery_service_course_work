@@ -56,6 +56,17 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
+    user_first_name = serializers.SerializerMethodField()
+
+    def get_user_first_name(self, obj):
+        try:
+            customer = Customer.objects.get(feedback=obj)
+            user = customer.user
+
+            return user.first_name
+        except Customer.DoesNotExist:
+            return None
+
     class Meta:
         model = Feedback
-        fields = ['id', 'user', 'review_text', 'rating', 'review_date']
+        fields = ['id', 'user_first_name', 'review_text', 'rating', 'review_date']

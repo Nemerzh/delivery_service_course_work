@@ -10,4 +10,5 @@ urlpatterns = [
     path('auth/logout', index),
 
     path('feedback/list', index2),
+    path('feedback/add', index2),
 ]

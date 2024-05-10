@@ -8,6 +8,7 @@ import User from './pages/auth/User';
 import PersistLogin from './components/PersistLogin';
 import Navbar from "./components/Navbar";
 import FeedbackPage from "./pages/feedback/FeedbackPage";
+import FeedbackAdd from "./pages/feedback/FeedbackAdd";
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
 
           <Route path='/feedback'>
             <Route path='list' element={<FeedbackPage />} />
+            <Route path='add' element={<FeedbackAdd />} />
           </Route>
 
         </Route>
