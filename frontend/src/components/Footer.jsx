@@ -18,7 +18,7 @@ export default function Footer(props) {
             <nav
                 className="navbar navbar-fixed-bottom navbar-expand-lg footer-top-size-color top-footer-component-position">
                 <div className="footer-top-container">
-                    <a className="navbar-brand nav-link active" href="">
+                    <a className="navbar-brand nav-link active" href="/">
                         <img className="logo-footer" src="../../static/images/5.png" alt="logo"/>
                     </a>
                     <div className="footer-supported-content" id="navbarSupportedContent1">

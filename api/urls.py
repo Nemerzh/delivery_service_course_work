@@ -2,7 +2,7 @@ from django.urls import path, include
 from api.views import *
 
 urlpatterns = [
-    path('index/category', CategoryView.as_view(), name='index'),
+    path('category', CategoryView.as_view(), name='index'),
     path('index/user', UserView.as_view(), name='index'),
 
     path('feedback/last', LastFiveFeedbacksView.as_view(), name='last-five-feedbacks'),
