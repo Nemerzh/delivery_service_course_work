@@ -234,11 +234,17 @@
     background-color: rgba(0, 0, 0, 0.4);
     visibility: hidden;
     opacity: 0;
+    cursor: pointer; /* Додаємо курсор, щоб підказати користувачеві, що це клікабельний елемент */
+}
+
+.mask-content.clicked { /* Додали новий клас для зміни стилів після кліку */
+    visibility: hidden;
+    opacity: 0;
 }
 
 [id='menu-toggle']:checked ~ .mask-content {
-    visibility: visible;
-    opacity: 1;
+    visibility: visible ;
+    opacity: 1 ;
     -webkit-transition: opacity .5s, visibility .5s;
     transition: opacity .5s, visibility .5s;
 }

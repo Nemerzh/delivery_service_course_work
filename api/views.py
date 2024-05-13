@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from api.serializers import CategorySerializer, UserSerializer, FeedbackSerializer
+from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer
 
 from api.models import Category, User, Feedback
 
@@ -143,7 +143,7 @@ def user(request):
 
 class CategoryView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = CategoriesSerializer
 
 
 class UserView(generics.ListCreateAPIView):

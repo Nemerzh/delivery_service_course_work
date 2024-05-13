@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import User from './pages/auth/User';
 import PersistLogin from './components/PersistLogin';
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import FeedbackPage from "./pages/feedback/FeedbackPage";
 import FeedbackAdd from "./pages/feedback/FeedbackAdd";
 

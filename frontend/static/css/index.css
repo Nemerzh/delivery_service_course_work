@@ -1,1 +1,134 @@
+.bg-image {
+    width: 100%;
+}
 
+.start-page-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    min-height: calc(100vh - 334px);
+}
+
+.img-start-page {
+    width: 100%;
+    background-image: url("../../static/images/bg1.jpg");
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    min-height: calc(100vh - 450px);
+    background-repeat: no-repeat;
+    padding: 10vh 15px;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .img-start-page {
+        background-image: url(../../static/images/bg5.png);
+    }
+}
+
+.test3 {
+    max-width: 1280px;
+    min-width: 320px;
+    gap: 40px;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-align-self: center;
+    -ms-flex-item-align: center;
+    align-self: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.bg-img-title {
+    color: #ffffff;
+    font-weight: 500;
+    margin: 0;
+    z-index: 2;
+    position: relative;
+    line-height: 38px !important;
+    -webkit-text-stroke: 0.5px #000000;
+}
+
+@media screen and (max-width: 1024px) {
+    .food-delivery-logo {
+        content: url("../../static/images/food-medium.png");
+    }
+}
+
+
+.link-to-main-page {
+    text-decoration: none;
+    color: white;
+    transition: transform .6s;
+}
+
+.link-to-main-page:hover {
+    transform: scale(1.1);
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: 500;
+}
+
+.link-to-main-page-body {
+    width: 190px;
+    height: 60px;
+    font-size: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(102, 151, 223, 0.49);
+    border-radius: 15px;
+    border: 1px solid #000000;
+
+    text-decoration: none;
+
+    cursor: pointer;
+    -webkit-transition: 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+
+}
+
+.start-page-text-container {
+    font-weight: 400;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.title-start-page-text {
+    padding: 33px 0 32px 0;
+}
+
+.test5 {
+    width: 276px;
+    height: 225px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
