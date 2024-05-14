@@ -36,10 +36,12 @@
   margin-top: 20px;
 }
 
-.container {
+.register-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #DDDBDB;
+  height: 100vh;
 }
 
 form {
@@ -60,11 +62,6 @@ form {
   height: 530px;
   background: #BABABA;
   border-radius: 10px;
-}
-
-#root {
-  background: #DDDBDB;
-  height: 100vh;
 }
 
 .icons {

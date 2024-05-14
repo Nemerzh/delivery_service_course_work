@@ -27,7 +27,7 @@ export default function User() {
     
     return (
         <div>
-            <h4>{user?.username}</h4>
+            <h4>{user?.first_name}</h4>
             <button disabled={loading} type='button' onClick={onLogout}>Logout</button>
         </div>
     )
