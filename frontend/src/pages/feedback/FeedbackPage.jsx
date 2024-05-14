@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
+import '../../../static/css/feedback.css';
 
 function FeedbackPage() {
     const [comments, setComments] = useState([]);

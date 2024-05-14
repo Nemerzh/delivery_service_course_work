@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
 import useUser  from "../../hooks/useUser";
+import '../../../static/css/feedback.css';
 
 function FeedbackAdd() {
     const { user } = useAuth();
-    const history = useHistory();
 
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
@@ -28,8 +28,6 @@ function FeedbackAdd() {
         try {
             await axios.post('http://localhost:8000/api/feedback/', feedbackData);
             console.log('Review submitted successfully.');
-
-            history.push('/feedback/list');
         } catch (error) {
             console.error('Error submitting review:', error);
         }

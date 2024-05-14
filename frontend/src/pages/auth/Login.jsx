@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import {useNavigate, useLocation} from 'react-router-dom'
+import {useNavigate, useLocation, Link} from 'react-router-dom'
 import {axiosInstance} from '../../api/apiConfig'
 import useAuth from '../../hooks/useAuth'
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import HttpsIcon from '@mui/icons-material/Https';
+import '../../../static/css/login.css';
 
 export default function Login() {
 
@@ -50,10 +51,10 @@ export default function Login() {
     }
 
     return (
-        <div className='container'>
-            <a href="/">
+        <div className='login-page-container'>
+            <Link to="/">
                 <img src="/../static/images/5.png" className="logotype" alt="logotype"/>
-            </a>
+            </Link>
             <div className="login-container">
                 <h3 className="login-form-label">Login</h3>
                 <form onSubmit={onSubmitForm}>

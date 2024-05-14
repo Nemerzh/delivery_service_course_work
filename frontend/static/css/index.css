@@ -35,7 +35,7 @@
     }
 }
 
-.test3 {
+.img-start-page-content {
     max-width: 1280px;
     min-width: 320px;
     gap: 40px;
@@ -124,11 +124,34 @@
     padding: 33px 0 32px 0;
 }
 
-.test5 {
+.category-swiper-start-page {
     width: 276px;
     height: 225px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    transition: transform .5s;
 }
+
+.category-swiper-start-page:hover {
+    transform: scale(1.05);
+}
+
+.swiper-button-prev, .swiper-button-next {
+    color: black !important;
+}
+
+.swiper-button-prev{
+    left: 0 !important;
+}
+
+.swiper-button-next {
+    right: 0 !important;
+}
+
+:root {
+    --swiper-navigation-size: 25px !important;
+}
+
