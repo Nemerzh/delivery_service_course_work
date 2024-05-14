@@ -4,7 +4,6 @@ import {Navigation, A11y} from 'swiper/modules';
 import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {useSwiper} from 'swiper/react';
-
 import '../../static/css/index.css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -14,6 +13,7 @@ export default function Home() {
     const [categories, setCategories] = useState([]);
     const [size, setSize] = useState(4);
     const swiper = useSwiper();
+
 
     useEffect(() => {
         const fetchCategory = async () => {
