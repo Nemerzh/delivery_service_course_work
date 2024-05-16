@@ -20,3 +20,7 @@ def register(request, *args, **kwargs):
 
 def login(request, *args, **kwargs):
     return render(request, 'frontend/login.html')
+
+
+def shoppingcart(request, *args, **kwargs):
+    return render(request, 'frontend/shoppingcart.html')

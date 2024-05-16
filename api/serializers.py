@@ -52,7 +52,7 @@ class CategoriesSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ("id", "email", "is_staff", "first_name", "last_name")
+        fields = ("id", "email", "phone_number", "is_staff", "first_name", "last_name")
 
 
 class FeedbackSerializer(serializers.ModelSerializer):
@@ -70,3 +70,33 @@ class FeedbackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Feedback
         fields = ['id', 'user_first_name', 'review_text', 'rating', 'review_date']
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Customer
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+class DishSerializer(serializers.ModelSerializer):
+    category = CategoriesSerializer()
+
+    class Meta:
+        model = Dish
+        fields = ['id', 'product_name', 'description', 'price', 'discount', 'category', 'mass', 'calories', 'protein',
+                  'fat', 'carbohydrate', 'image_url', 'available']
+
+
+class DishToOrderSerializer(serializers.ModelSerializer):
+    dish = DishSerializer()
+    order = OrderSerializer()
+
+    class Meta:
+        model = DishToOrder
+        fields = '__all__'
