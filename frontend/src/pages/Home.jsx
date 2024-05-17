@@ -20,7 +20,6 @@ export default function Home() {
             try {
                 const response = await axios.get("http://localhost:8000/api/category");
                 setCategories(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error('Error fetching category:', error);
             }
@@ -46,7 +45,6 @@ export default function Home() {
 
     window.addEventListener('resize', () => {
         let newSize = calculateSlidesPerView();
-        console.log(newSize)
         setSize(newSize);
     });
 

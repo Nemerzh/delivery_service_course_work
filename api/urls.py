@@ -13,4 +13,10 @@ urlpatterns = [
     path('refresh-token', CookieTokenRefreshView.as_view()),
     path('logout', logout_view),
     path("user", user),
+    path('update_profile/<int:user_id>', UpdateUserProfile.as_view(), name='update_profile'),
+    path('customer/<int:user_id>', CustomerView.as_view(), name='customer_list'),
+    path('user-ready-dishes/<int:user_id>/', UserReadyDishesListView.as_view(), name='user-ready-dishes'),
+    path('update_dish_to_order/<int:dish_to_order_id>', UpdateDishToOrderView.as_view(), name='update_dish_to_order'),
+    path('delete-order/<int:user_id>', DeleteOrderAPIView.as_view(), name='delete_order'),
+
 ]

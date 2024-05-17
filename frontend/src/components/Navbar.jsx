@@ -5,6 +5,7 @@ import useLogout from "../hooks/useLogout"
 import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { toast } from 'react-toastify';
@@ -58,7 +59,7 @@ export default function Navbar(props) {
                 </h2>
                 <ul>
                     <li>
-                        <Link to="" onClick={closeMenu}>Профіль</Link>
+                        <Link to="auth/user" onClick={closeMenu}>Профіль</Link>
                     </li>
                     <li>
                         <Link to="" onClick={closeMenu}>Меню</Link>
@@ -94,26 +95,30 @@ export default function Navbar(props) {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/auth/login" className="nav-link active link-scale">
+                                <Link to="shoppingcart" className="nav-link active link-scale">
                                     <ShoppingCartIcon fontSize="large"/>
                                 </Link>
                             </li>
                             <li className="nav-item">
                                 <div className="nav-link active link-scale">
+                                    {!isLoggedIn ? (
+                                        <NoAccountsIcon fontSize="large" onClick={handleClick}/>
+                                    ) : (
                                         <AccountCircleIcon fontSize="large" onClick={handleClick} />
+                                    )}
                                     <Menu
                                         anchorEl={anchorEl}
                                         open={Boolean(anchorEl)}
                                         onClose={handleClose}
                                     >
                                         <MenuItem onClick={handleClose}>
-                                            <Link to="/auth/user">Мій аккаунт</Link>
+                                            <Link className="profile-drop-link" to="/auth/user">Мій аккаунт</Link>
                                         </MenuItem>
-                                        <MenuItem onClick={handleClose}>
-                                            <Link to="/auth/login">Увійти</Link>
+                                        <MenuItem disabled={isLoggedIn} onClick={handleClose}>
+                                            <Link className="profile-drop-link" to="/auth/login">Увійти</Link>
                                         </MenuItem>
                                         <MenuItem disabled={!isLoggedIn} onClick={() => { onLogout(); handleClose(); }}>
-                                            <Link to="/auth/user">Вийти</Link>
+                                            <Link className="profile-drop-link" to="/auth/user">Вийти</Link>
                                         </MenuItem>
                                     </Menu>
                                 </div>
