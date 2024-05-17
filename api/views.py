@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer
-
-from api.models import Category, User, Feedback
-
+from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer, CustomerSerializer, \
+    DishToOrderSerializer
+from rest_framework.views import APIView
+from api.models import Category, User, Feedback, Customer, DishToOrder, Order
+from rest_framework.response import Response
+from rest_framework import status
 from django.contrib.auth import authenticate
 from django.conf import settings
 from django.middleware import csrf
@@ -12,6 +14,9 @@ from rest_framework import exceptions as rest_exceptions, response, decorators a
 from rest_framework_simplejwt import tokens, views as jwt_views, serializers as jwt_serializers, \
     exceptions as jwt_exceptions
 from api import serializers, models
+from .service import update_user_profile
+
+from django.views.generic import ListView
 
 
 def get_user_tokens(user):
@@ -172,3 +177,71 @@ class LastFiveFeedbacksView(generics.ListAPIView):
             queryset = Feedback.objects.order_by('-id')[:1]
 
         return queryset
+
+
+class UpdateUserProfile(APIView):
+    def put(self, request, user_id):
+        phone_number = request.data.get('phone_number')
+        first_name = request.data.get('first_name')
+        last_name = request.data.get('last_name')
+        delivery_address = request.data.get('delivery_address')
+        password = request.data.get('password')
+        success, message = update_user_profile(user_id, phone_number, first_name, last_name, delivery_address, password)
+
+        if success:
+            return Response({"message": message}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": message}, status=status.HTTP_404_NOT_FOUND)
+
+
+class CustomerView(generics.RetrieveAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+    lookup_field = 'user_id'
+
+
+class UserReadyDishesListView(generics.ListAPIView):
+    serializer_class = DishToOrderSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        customer = Customer.objects.filter(user_id=user_id).first()
+        queryset = DishToOrder.objects.filter(order__user_id=customer.id, order__order_status="ready")
+        return queryset
+
+
+class UpdateDishToOrderView(APIView):
+    def post(self, request, dish_to_order_id):
+        try:
+            dish_to_order = DishToOrder.objects.get(id=dish_to_order_id)
+        except DishToOrder.DoesNotExist:
+            return Response({'error': 'DishToOrder not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        add_or_minus = request.data.get('add_or_minus')
+        if add_or_minus == "add":
+            dish_to_order.count += 1
+        elif add_or_minus == "minus":
+            dish_to_order.count -= 1
+            if dish_to_order.count <= 0:
+                dish_to_order.delete()
+                return Response({'success': 'DishToOrder deleted successfully'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'Action not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        dish_to_order.save()
+        return Response({'success': 'DishToOrder updated successfully'}, status=status.HTTP_200_OK)
+
+
+class DeleteOrderAPIView(APIView):
+    def delete(self, request, user_id, format=None):
+        customer = Customer.objects.filter(user_id=user_id).first()
+        orders = Order.objects.filter(user_id=customer.id, order_status='ready')
+
+        if orders.exists():
+            for order in orders:
+                order.delete()
+            return Response({"message": "Orders with status 'ready' deleted successfully."},
+                            status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({"error": "No orders found with status 'ready' for the specified user."},
+                            status=status.HTTP_404_NOT_FOUND)

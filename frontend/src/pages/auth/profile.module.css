@@ -1,0 +1,90 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    min-height: calc(100vh - 334px);
+    margin: 0 auto 50px;
+}
+
+@media screen and (max-width: 670px) {
+    .form {
+        min-width: 300px !important;
+    }
+
+    .btn {
+        width: 100px !important;
+        height: 40px !important;
+        font-size: 16px !important;
+    }
+}
+
+.form {
+    min-width: 500px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: #D9D9D9;
+    border-radius: 10px;
+}
+
+.img {
+    margin-top: 50px;
+    margin-bottom: 25px;
+    width: 160px;
+    height: 160px;
+}
+
+.test {
+    width: 100%;
+}
+
+.test > label {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.param-field {
+    flex: 1;
+    padding: 5px 5px 5px 15px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 40px;
+}
+
+.label-profile {
+
+}
+
+.btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    background: #7997E4;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    margin-bottom: 50px;
+    cursor: pointer;
+    transition: transform .5s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}

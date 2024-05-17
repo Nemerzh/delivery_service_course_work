@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import index, register, login, feedback, profile, main
+from .views import index, register, login, feedback, profile, shoppingcart, main
 
 
 urlpatterns = [
     path('', index),
+    path('shoppingcart', shoppingcart),
     path('auth/login', login),
     path('auth/register', register),
     path('auth/user', profile),
