@@ -209,10 +209,8 @@ class UserReadyDishesListView(generics.ListAPIView):
     serializer_class = DishToOrderSerializer
 
     def get_queryset(self):
-        user_id = self.kwargs['user_id']  # Отримайти user_id з URL
+        user_id = self.kwargs['user_id']
         customer = Customer.objects.filter(user_id=user_id).first()
-        print()
-        # Знайти всі страви користувача зі статусом "ready"
         queryset = DishToOrder.objects.filter(order__user_id=customer.id, order__order_status="ready")
         return queryset
 
@@ -237,3 +235,18 @@ class UpdateDishToOrderView(APIView):
 
         dish_to_order.save()
         return Response({'success': 'DishToOrder updated successfully'}, status=status.HTTP_200_OK)
+
+
+class DeleteOrderAPIView(APIView):
+    def delete(self, request, user_id, format=None):
+        customer = Customer.objects.filter(user_id=user_id).first()
+        orders = Order.objects.filter(user_id=customer.id, order_status='ready')
+
+        if orders.exists():
+            for order in orders:
+                order.delete()
+            return Response({"message": "Orders with status 'ready' deleted successfully."},
+                            status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response({"error": "No orders found with status 'ready' for the specified user."},
+                            status=status.HTTP_404_NOT_FOUND)

@@ -28,7 +28,6 @@ export default function User() {
     }, [])
 
 
-
     useEffect(() => {
         async function fetchDeliveryAddress() {
             if (user.id) {
@@ -68,6 +67,18 @@ export default function User() {
         setDishes(response.data);
     }
 
+    async function onDeleteClick() {
+        try {
+            const response = await axiosInstance.delete(`api/delete-order/${user.id}`);
+            await toMenu();
+            return response.data;
+        } catch (error) {
+            toast.error("Order not found");
+            throw error;
+        }
+
+    }
+
     async function toMenu() {
         navigate('/')
     }
@@ -80,7 +91,8 @@ export default function User() {
                 <div className={styles["cart-container"]}>
                     <div className={styles["top-part-cart-container"]}>
                         <h4 className={styles["h4-cart"]}>FoodDelivery</h4>
-                        <DeleteIcon className={styles["delete-icon"]} fontSize={"large"}/>
+                        <DeleteIcon className={styles["delete-icon"]} fontSize={"large"}
+                                    onClick={onDeleteClick}/>
                     </div>
 
                     {dishes.map(dish =>
@@ -106,7 +118,9 @@ export default function User() {
                 </div>
                 <div className={styles["btn-container"]}>
                     <button disabled={loading} type='button' className={styles["to-order"]}>Оформити</button>
-                    <button disabled={loading} type='button' className={styles["to-menu"]} onClick={toMenu}>Назад до меню</button>
+                    <button disabled={loading} type='button' className={styles["to-menu"]} onClick={toMenu}>Назад до
+                        меню
+                    </button>
 
                 </div>
             </div>

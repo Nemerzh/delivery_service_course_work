@@ -33,8 +33,8 @@ function App() {
                     <Route path='/auth'>
                         <Route path='login' element={!isLoggedIn ? (<Login/>) : (<Navigate replace to={"/"}/>)}></Route>
                         <Route path='register' element={!isLoggedIn ? (<Register/>) : (<Navigate replace to={"/"}/>)}></Route>
-                        <Route path='user' element={<AuthMiddleware/>}>
-                            <Route index element={<User/>}></Route>
+                        <Route path='user' element={isLoggedIn ? (<AuthMiddleware/>) : (<Navigate to={"../login"}/>)}>
+                            <Route index element={isLoggedIn ? (<User/>) : (<Navigate to={"../login"}/>)}></Route>
                         </Route>
                     </Route>
 
