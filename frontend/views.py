@@ -22,5 +22,9 @@ def login(request, *args, **kwargs):
     return render(request, 'frontend/login.html')
 
 
+def main(request, *args, **kwargs):
+    return render(request, 'frontend/main.html')
+
 def shoppingcart(request, *args, **kwargs):
     return render(request, 'frontend/shoppingcart.html')
+

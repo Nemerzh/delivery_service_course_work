@@ -1,39 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { NavLink } from "react-router-dom";
 import axios from 'axios';
+import useUser from '../../hooks/useUser';
+import {axiosPrivateInstance} from "../../api/apiConfig";
 import useAuth from "../../hooks/useAuth";
-import useUser  from "../../hooks/useUser";
-import '../../../static/css/feedback.css';
+
 
 function FeedbackAdd() {
-    const { user } = useAuth();
-
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
     const [totalStars, setTotalStars] = useState(5);
     const [reviewText, setReviewText] = useState('');
+    const { user } = useAuth()
+    const getUser = useUser()
+
+    useEffect(()=>{
+        getUser()
+    },[])
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        const reviewDate = new Date().toISOString();
-
-        const feedbackData = {
-            rating,
-            review_text: reviewText,
-            review_date: reviewDate,
-            user_first_name: user?.first_name // WTF
-        };
-
         try {
-            await axios.post('http://localhost:8000/api/feedback/', feedbackData);
-            console.log('Review submitted successfully.');
-        } catch (error) {
-            console.error('Error submitting review:', error);
-        }
+            await axios.post('http://localhost:8000/api/feedback', {
+                rating: rating,
+                review_text: reviewText,
+                user: user.id,
+                review_date: new Date().toISOString(),
+            });
 
-        setRating(null);
-        setReviewText('');
+            setRating(null);
+            setReviewText('');
+
+            window.location.href = '/feedback/list';
+        } catch (error) {
+            console.error('Error sending feedback:', error);
+        }
     };
 
     const handleReviewTextChange = (event) => {
@@ -100,4 +103,3 @@ function FeedbackAdd() {
 }
 
 export default FeedbackAdd;
-
