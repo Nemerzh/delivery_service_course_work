@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, register, login, feedback, profile
+from .views import index, register, login, feedback, profile, main
 
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
 
     path('feedback/list', feedback),
     path('feedback/add', feedback),
+    path('main', main),
 ]

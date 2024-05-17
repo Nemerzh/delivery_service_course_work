@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import FeedbackPage from "./pages/feedback/FeedbackPage";
 import FeedbackAdd from "./pages/feedback/FeedbackAdd";
+import MainPage from "./pages/main/MainPage";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route path='add' element={<FeedbackAdd />} />
           </Route>
 
+          <Route path='/main' element={<MainPage />} />
         </Route>
 
         <Route path='*' element={<Navigate to='/' />}></Route>

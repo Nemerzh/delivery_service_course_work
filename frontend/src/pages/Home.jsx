@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from "react";
+import { NavLink } from 'react-router-dom';
 import {Navigation, A11y} from 'swiper/modules';
 import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -59,9 +60,9 @@ export default function Home() {
                     <h1 className="bg-img-title">
                         Замовляй улюблені страви
                     </h1>
-                    <a className="link-to-main-page" href="/">
+                    <NavLink to="/main" className="link-to-main-page">
                         <div className="link-to-main-page-body">Меню</div>
-                    </a>
+                    </NavLink>
                 </div>
             </div>
 

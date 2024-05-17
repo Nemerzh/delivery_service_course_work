@@ -157,11 +157,6 @@ class FeedbackView(generics.ListCreateAPIView):
     serializer_class = FeedbackSerializer
 
 
-from rest_framework import generics
-from .models import Feedback
-from .serializers import FeedbackSerializer
-
-
 class LastFiveFeedbacksView(generics.ListAPIView):
     serializer_class = FeedbackSerializer
 
