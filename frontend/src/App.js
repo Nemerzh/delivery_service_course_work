@@ -14,6 +14,7 @@ import FeedbackPage from "./pages/feedback/FeedbackPage";
 import FeedbackAdd from "./pages/feedback/FeedbackAdd";
 import ShoppingCart from "./pages/ShoppingCart"
 import useAuth from "./hooks/useAuth";
+import MainPage from "./pages/main/MainPage";
 
 function App() {
     const {isLoggedIn} = useAuth();
@@ -43,6 +44,7 @@ function App() {
                         <Route path='add' element={isLoggedIn ? (<FeedbackAdd/>) : (<Navigate replace to={"/"}/>)}/>
                     </Route>
 
+                  <Route path='/main' element={<MainPage />} />
                 </Route>
 
                 <Route path='*' element={<Navigate to='/'/>}></Route>

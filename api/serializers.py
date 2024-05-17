@@ -62,14 +62,14 @@ class FeedbackSerializer(serializers.ModelSerializer):
         try:
             customer = Customer.objects.get(feedback=obj)
             user = customer.user
-
             return user.first_name
         except Customer.DoesNotExist:
             return None
 
     class Meta:
-        model = Feedback
-        fields = ['id', 'user_first_name', 'review_text', 'rating', 'review_date']
+        model = Feedback2
+        fields = ['id', 'user', 'user_first_name', 'review_text', 'rating', 'review_date']
+        
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -100,3 +100,4 @@ class DishToOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = DishToOrder
         fields = '__all__'
+        
