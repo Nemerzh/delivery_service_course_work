@@ -23,3 +23,4 @@ urlpatterns = [
     path('dish_to_order_id/<int:id>', UpdateCountDishToOrderAPIView.as_view(), name='dish_to_order_id'),
     path("order", OrderAPIView.as_view(), name='order'),
 ]
+

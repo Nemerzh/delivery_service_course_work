@@ -163,7 +163,6 @@ export default function MainPage() {
         fetchCategory();
     }, []);
 
-
     useEffect(() => {
         const fetchDishes = async () => {
             if (selectCategory) {

@@ -60,6 +60,7 @@ function App() {
                     <Route path='/actions' element={<Actions/>}/>
                     <Route path='/confidentialityrules' element={<ConfidentialityRules/>}/>
                     <Route path='/info' element={<Info/>}/>
+
                 </Route>
 
                 <Route path='*' element={<Navigate to='/'/>}></Route>
