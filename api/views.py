@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
-from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer, CustomerSerializer, \
-    DishToOrderSerializer
-from rest_framework.views import APIView
-from api.models import Category, User, Feedback, Customer, DishToOrder, Order
-from rest_framework.response import Response
-from rest_framework import status
+from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer
+
+from api.models import Category, User, Feedback
+
 from django.contrib.auth import authenticate
 from django.conf import settings
 from django.middleware import csrf
@@ -15,8 +13,14 @@ from rest_framework_simplejwt import tokens, views as jwt_views, serializers as 
     exceptions as jwt_exceptions
 from api import serializers, models
 from .service import update_user_profile
-
+from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from django.views.generic import ListView
+from rest_framework.response import Response
+from rest_framework import status
+from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer, CustomerSerializer, \
+    DishToOrderSerializer, DishSerializer, OrderSerializer, GetDishToOrderSerializer
+from rest_framework.views import APIView
+from api.models import Category, User, Feedback, Customer, DishToOrder, Order, Dish
 
 
 def get_user_tokens(user):
@@ -178,7 +182,6 @@ class LastFiveFeedbacksView(generics.ListAPIView):
 
         return queryset
 
-
 class UpdateUserProfile(APIView):
     def put(self, request, user_id):
         phone_number = request.data.get('phone_number')
@@ -245,3 +248,52 @@ class DeleteOrderAPIView(APIView):
         else:
             return Response({"error": "No orders found with status 'ready' for the specified user."},
                             status=status.HTTP_404_NOT_FOUND)
+
+
+class CategoryDishAPIView(APIView):
+    def get(self, request, category_id):
+        try:
+            queryset = Dish.objects.filter(category_id=category_id)
+            serializer = DishSerializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Dish.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class DishToOrderAPIView(generics.ListCreateAPIView):
+    queryset = DishToOrder.objects.all()
+    serializer_class = DishToOrderSerializer
+
+
+class GetDishToOrderAPIView(generics.ListCreateAPIView):
+    queryset = DishToOrder.objects.all()
+    serializer_class = GetDishToOrderSerializer
+
+    def get(self, request, *args, **kwargs):
+        order_id = request.query_params.get('order_id')
+        dish_id = request.query_params.get('dish_id')
+        if order_id and dish_id:
+            dish_to_order = DishToOrder.objects.filter(order_id=order_id, dish_id=dish_id).first()
+            if dish_to_order:
+                serializer = self.get_serializer(dish_to_order)
+                return Response(serializer.data)
+            return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
+        return super().get(request, *args, **kwargs)
+
+
+class OrderAPIView(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class UpdateCountDishToOrderAPIView(generics.UpdateAPIView):
+    queryset = DishToOrder.objects.all()
+    serializer_class = DishToOrderSerializer
+    lookup_field = 'id'
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.count = request.data.get("count", instance.count)
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
