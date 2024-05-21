@@ -67,9 +67,8 @@ class FeedbackSerializer(serializers.ModelSerializer):
             return None
 
     class Meta:
-        model = Feedback2
+        model = Feedback
         fields = ['id', 'user', 'user_first_name', 'review_text', 'rating', 'review_date']
-        
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -100,4 +99,3 @@ class DishToOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = DishToOrder
         fields = '__all__'
-        

@@ -41,7 +41,7 @@ export default function MainPage() {
                     className="swiper-container"
                     modules={[Navigation, A11y]}
                     spaceBetween={11}
-                    slidesPerView={size}
+                    slidesPerView={5}
                     navigation
                 >
                     {categories.map(category => (
@@ -52,7 +52,6 @@ export default function MainPage() {
                             key={category.id}
                         >
                             <div className="category-swiper-start-page">
-                                <img src={category.url_image} alt="" />
                                 <h5>{category.category_name}</h5>
                             </div>
                         </SwiperSlide>

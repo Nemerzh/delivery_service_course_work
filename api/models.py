@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Count, Q
+import re
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, AbstractBaseUser
 from django.contrib.auth import get_user_model
@@ -70,7 +72,16 @@ class Order(models.Model):
     end_time = models.DateTimeField()
     order_status = models.CharField(max_length=255)
     price = models.FloatField()
-    comment = models.CharField(max_length=500)
+    comment = models.TextField(max_length=500)
+
+    def __str__(self):
+        return "Order " + str(self.id) + " for " + str(self.user)
+
+    def parse_delivery_address(self):
+        match = re.search(r"Адреса доставки:\s*(.*)", self.comment)
+        if match:
+            return match.group(1)
+        return None
 
 
 class Delivery(models.Model):
@@ -94,6 +105,24 @@ class Feedback(models.Model):
 
 class Courier(models.Model):
     user = models.OneToOneField('User', on_delete=models.CASCADE)
+
+    @classmethod
+    def find_free_courier(cls):
+        # Знайти всіх кур'єрів і підрахувати кількість активних доставок
+        couriers_with_deliveries = cls.objects.annotate(
+            active_deliveries=Count('delivery', filter=Q(delivery__delivery_status='pending'))
+        )
+
+        # Відфільтрувати кур'єрів без активних доставок
+        free_couriers = couriers_with_deliveries.filter(active_deliveries=0)
+
+        if free_couriers.exists():
+            return free_couriers.first()
+
+        # Якщо немає вільних кур'єрів, знайти кур'єра з найменшою кількістю активних доставок
+        courier_with_least_deliveries = couriers_with_deliveries.order_by('active_deliveries').first()
+
+        return courier_with_least_deliveries
 
 
 class Customer(models.Model):
@@ -119,6 +148,9 @@ class DishToOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     count = models.IntegerField()
+
+    def __str__(self):
+        return "Dish to " + str(self.order)
 
 
 class User(AbstractBaseUser):
