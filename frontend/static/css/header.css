@@ -1,6 +1,7 @@
 .nav-link {
     color: #fff;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .link-scale {
@@ -36,6 +37,11 @@
 }
 .sticky-top {
     z-index: 100 !important;
+}
+
+.profile-drop-link {
+    text-decoration: none;
+    color: black;
 }
 
 

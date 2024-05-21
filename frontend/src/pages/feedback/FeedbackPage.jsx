@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
+import '../../../static/css/feedback.css';
+import * as styles from "../main/main.module.css";
+
 
 function FeedbackPage() {
     const [comments, setComments] = useState([]);
     const [page, setPage] = useState(1);
     const commentsPerPage = 5;
-    const { isLoggedIn } = useAuth();
+    const {isLoggedIn} = useAuth();
 
     const minId = comments.length > 0 ? comments[comments.length - 1].id : null;
 
@@ -51,17 +54,32 @@ function FeedbackPage() {
 
     return (
         <div className="feedback-page">
+
+            <div className={styles.banner}>
+                <div className={styles["banner-head"]}>
+                    <img className={styles["head-logo"]} src="../../../static/images/3.png" alt="Fooddelivery"/>
+                </div>
+                <div className={styles["banner-body"]}>
+                    <NavLink to="/main" className={styles["button-banner"]}>
+                        Меню
+                    </NavLink>
+                    <a className={`${styles["button-banner"]} ${styles["active"]}`}>Відгуки</a>
+                    <a href="#" className={styles["button-banner"]}>Історія</a>
+                    <a href="#" className={styles["button-banner"]}>Інфо</a>
+                </div>
+            </div>
+
             <div className="feedback-container">
-                <h1>Feedbacks</h1>
-                <hr />
+                <h1>Відгуки</h1>
+                <hr/>
 
                 {isLoggedIn ? (
                     <NavLink to="/feedback/add" className="add-comment-cell">
-                        Add new comment
+                        Додати відгук
                     </NavLink>
                 ) : (
                     <div className="add-comment-cell">
-                        Login to add a comment
+                        Авторизуйтесь щоб залишити відгук
                     </div>
                 )}
 
@@ -70,7 +88,7 @@ function FeedbackPage() {
                         <div className="comment-header">
                             {`${comment.user_first_name} - ${comment.rating}/5`}
                         </div>
-                        <hr />
+                        <hr/>
                         <div className="comment-text">
                             {comment.review_text}
                         </div>
@@ -79,7 +97,7 @@ function FeedbackPage() {
 
                 {minId > 1 && (
                     <button onClick={handleLoadMore} className="load-more-button">
-                        More
+                        Ще
                     </button>
                 )}
             </div>
@@ -88,5 +106,3 @@ function FeedbackPage() {
 }
 
 export default FeedbackPage;
-
-

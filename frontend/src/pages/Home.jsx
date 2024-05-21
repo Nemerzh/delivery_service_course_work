@@ -1,9 +1,11 @@
 import React from 'react'
 import {useState, useEffect} from "react";
+import { NavLink } from 'react-router-dom';
 import {Navigation, A11y} from 'swiper/modules';
 import axios from "axios";
 import {Swiper, SwiperSlide} from "swiper/react";
-
+import {useSwiper} from 'swiper/react';
+import '../../static/css/index.css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
@@ -11,13 +13,14 @@ import 'swiper/css';
 export default function Home() {
     const [categories, setCategories] = useState([]);
     const [size, setSize] = useState(4);
+    const swiper = useSwiper();
+
 
     useEffect(() => {
         const fetchCategory = async () => {
             try {
                 const response = await axios.get("http://localhost:8000/api/category");
                 setCategories(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error('Error fetching category:', error);
             }
@@ -43,7 +46,6 @@ export default function Home() {
 
     window.addEventListener('resize', () => {
         let newSize = calculateSlidesPerView();
-        console.log(newSize)
         setSize(newSize);
     });
 
@@ -51,14 +53,14 @@ export default function Home() {
     return (
         <div className="start-page-main-container">
             <div className="img-start-page">
-                <div className="test3">
+                <div className="img-start-page-content">
                     <img className="food-delivery-logo" src="../../static/images/Food.png" alt="Fooddelivery"/>
                     <h1 className="bg-img-title">
                         Замовляй улюблені страви
                     </h1>
-                    <a className="link-to-main-page" href="/">
+                    <NavLink to="/main" className="link-to-main-page">
                         <div className="link-to-main-page-body">Меню</div>
-                    </a>
+                    </NavLink>
                 </div>
             </div>
 
@@ -66,17 +68,18 @@ export default function Home() {
                 <Swiper
                     className="swiper-container"
                     modules={[Navigation, A11y]}
-                    spaceBetween={10}
+                    spaceBetween={11}
                     slidesPerView={size}
-                    // navigation
-                    onSwiper={(swiper) => {
-                    }}
-                    onSlideChange={() => {
-                    }}
+                    navigation
                 >
                     {categories.map(category => (
-                        <SwiperSlide key={category.id}>
-                            <div className="test5">
+                        <SwiperSlide
+                            onClick={(swiper) => {
+                                console.log()
+                            }}
+                            key={category.id}
+                        >
+                            <div className="category-swiper-start-page">
                                 <img src={category.url_image} alt=""/>
                                 <h5>{category.category_name}</h5>
                             </div>

@@ -1,0 +1,33 @@
+.info-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    height: 100%;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 2px 0 3px rgba(0, 0, 0, 0.2), -2px 0 3px rgba(0, 0, 0, 0.2);
+}
+hr {
+    width: 70%;
+    margin: 10px auto;
+    border: none;
+    height: 2px;
+    background-color: black;
+}
+h1, h2 {
+  text-align: left;
+  margin-bottom: 32px;
+}
+.main-text {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    margin: 0 0 1em 0;
+    padding: 0;
+    text-align: left;
+}
+

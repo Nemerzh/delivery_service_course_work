@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {NavLink} from "react-router-dom";
 import axios from 'axios';
+import useUser from '../../hooks/useUser';
+import {axiosInstance, axiosPrivateInstance} from "../../api/apiConfig";
 import useAuth from "../../hooks/useAuth";
-import useUser  from "../../hooks/useUser";
+import * as styles from "../main/main.module.css";
+
 
 function FeedbackAdd() {
-    const { user } = useAuth();
-    const history = useHistory();
-
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
     const [totalStars, setTotalStars] = useState(5);
     const [reviewText, setReviewText] = useState('');
+    const {user} = useAuth()
+    const getUser = useUser()
+
+    useEffect(() => {
+        getUser()
+    }, [])
+
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        const reviewDate = new Date().toISOString();
-
-        const feedbackData = {
-            rating,
-            review_text: reviewText,
-            review_date: reviewDate,
-            user_first_name: user?.first_name // WTF
-        };
-
         try {
-            await axios.post('http://localhost:8000/api/feedback/', feedbackData);
-            console.log('Review submitted successfully.');
+            const cust = await axiosInstance.get(`/api/customer/${user.id}`);
+            await axios.post('http://localhost:8000/api/feedback', {
+                rating: rating,
+                review_text: reviewText,
+                user: cust.data.id,
+                review_date: new Date().toISOString(),
+            });
 
-            history.push('/feedback/list');
+            setRating(null);
+            setReviewText('');
+
+            window.location.href = '/feedback/list';
         } catch (error) {
-            console.error('Error submitting review:', error);
+            console.error('Error sending feedback:', error);
         }
-
-        setRating(null);
-        setReviewText('');
     };
 
     const handleReviewTextChange = (event) => {
@@ -43,10 +46,26 @@ function FeedbackAdd() {
     };
 
     return (
-        <div className="feedback-page2">
-            <div className="feedback-container2">
-                <h1>Add feedback</h1>
-                <hr />
+        <div className="feedback-page">
+            <div className={styles.banner}>
+                <div className={styles["banner-head"]}>
+                    <img className={styles["head-logo"]} src="../../../static/images/3.png" alt="Fooddelivery"/>
+                </div>
+                <div className={styles["banner-body"]}>
+                    <NavLink to="/main" className={styles["button-banner"]}>
+                        Меню
+                    </NavLink>
+                    <NavLink to="/feedback/list" className={`${styles["button-banner"]} ${styles["active"]}`}>
+                        Відгуки
+                    </NavLink>
+                    <a href="#" className={styles["button-banner"]}>Історія</a>
+                    <a href="#" className={styles["button-banner"]}>Інфо</a>
+                </div>
+            </div>
+
+            <div className="feedback-container">
+                <h1>Залишити відгук</h1>
+                <hr/>
 
                 <div>
                     {[...Array(totalStars)].map((star, index) => {
@@ -85,14 +104,14 @@ function FeedbackAdd() {
                         className="feedback-textarea"
                         required
                     />
-                    <br />
+                    <br/>
 
                     <div className="button-container">
                         <button type="submit" className="submit-button">
-                            Submit
+                            Готово
                         </button>
                         <NavLink to="/feedback/list" className="submit-button">
-                            Back
+                            Назад
                         </NavLink>
                     </div>
                 </form>
@@ -102,4 +121,3 @@ function FeedbackAdd() {
 }
 
 export default FeedbackAdd;
-

@@ -1,12 +1,13 @@
 import React from 'react';
 import {useRef, useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {axiosInstance} from '../../api/apiConfig'
 import useAuth from "../../hooks/useAuth"
 import PersonIcon from '@mui/icons-material/Person';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HttpsIcon from '@mui/icons-material/Https';
+import '../../../static/css/register.css';
 
 
 export default function Register() {
@@ -46,10 +47,10 @@ export default function Register() {
     }
 
     return (
-        <div className='container'>
-            <a href="/">
+        <div className='register-page-container'>
+            <Link to="/">
                 <img src="/../static/images/5.png" className="logotype" alt="logotype"/>
-            </a>
+            </Link>
             <div className="sign-up-container">
                 <h3 className="sign-up-form-label">Create your account</h3>
                 <form onSubmit={onSubmitForm}>

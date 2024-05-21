@@ -12,8 +12,7 @@ export default function useUser() {
         }
 
         try {
-            const { data } = await axiosPrivateInstance.get('auth/user')
-
+            const { data } = await axiosPrivateInstance.get('api/user')
             setUser(data)
         } catch (error) {
             console.log(error.response)
