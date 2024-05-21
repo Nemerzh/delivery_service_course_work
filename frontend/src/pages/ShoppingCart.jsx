@@ -83,6 +83,22 @@ export default function User() {
         navigate('/')
     }
 
+    async function toCheckOut() {
+        if (dishes.length !== 0) {
+            navigate('/checkout')
+        } else {
+            toast.error("Ваш кошик пустий");
+        }
+    }
+
+    function calculateTotalPrice(dishes) {
+        let sum = 0;
+        dishes.forEach(dish => {
+            sum += dish.count * dish.dish.price * (1 - dish.dish.discount);
+        });
+        return sum;
+    }
+
 
     return (
         <div className={styles["main-content"]}>
@@ -100,7 +116,7 @@ export default function User() {
                             <div className={styles["product-card"]}>
                                 <div className={styles["card-text"]}>
                                     <h6>{dish.count} x {dish.dish.category.category_name}: {dish.dish.product_name}</h6>
-                                    <h7>{dish.dish.price} ₴</h7>
+                                    <h7>{dish.dish.price * (1 - dish.dish.discount)} ₴</h7>
                                 </div>
                                 <div className={styles["card-control"]}>
                                     <AddCircleIcon className={styles["control-item"]} color="success"
@@ -110,14 +126,12 @@ export default function User() {
                                 </div>
                             </div>
                         ))}
-                    {dishes.length > 0 ? (
-                        <h5>Чек: {dishes[0].order.price} ₴</h5>
-                    ) : (
-                        <h5>Чек: 0 ₴</h5>
-                    )}
+                    <h5>Чек: {calculateTotalPrice(dishes)} ₴</h5>
                 </div>
                 <div className={styles["btn-container"]}>
-                    <button disabled={loading} type='button' className={styles["to-order"]}>Оформити</button>
+                    <button disabled={loading} type='button' className={styles["to-order"]}
+                            onClick={toCheckOut}>Оформити
+                    </button>
                     <button disabled={loading} type='button' className={styles["to-menu"]} onClick={toMenu}>Назад до
                         меню
                     </button>

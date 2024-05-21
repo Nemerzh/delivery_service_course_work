@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from .models import User
+from .models import User, Order, Delivery
 from .models import Customer, Admin, Courier
 
 
@@ -20,3 +20,17 @@ def create_customer(sender, instance, created, **kwargs):
 def create_admin(sender, instance, created, **kwargs):
     if created and instance.is_admin and instance.role != "Courier":
         Admin.objects.create(user=instance)
+
+
+@receiver(post_save, sender=Order)
+def create_delivery_on_order_paid(sender, instance, created, **kwargs):
+    if instance.order_status == "paid":
+        free_courier = Courier.find_free_courier()
+        Delivery.objects.create(
+            current_order=instance,
+            courier=free_courier,
+            start_time=instance.start_time,
+            end_time=instance.end_time,
+            delivery_address=instance.parse_delivery_address(),  # Використовуйте правильну адресу доставки
+            delivery_status="pending"
+        )

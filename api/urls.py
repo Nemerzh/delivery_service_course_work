@@ -18,9 +18,11 @@ urlpatterns = [
     path('user-ready-dishes/<int:user_id>/', UserReadyDishesListView.as_view(), name='user-ready-dishes'),
     path('update_dish_to_order/<int:dish_to_order_id>', UpdateDishToOrderView.as_view(), name='update_dish_to_order'),
     path('delete-order/<int:user_id>', DeleteOrderAPIView.as_view(), name='delete_order'),
+    path('update_confirm_order/<int:order_id>', ConfirmUpdateOrder.as_view(), name='update_confirm_order'),
+    path('payments/create_payment/', create_payment, name='create_payment'),
+    path('payments/update_order/', update_order_status, name='update-order-status'),
     path('categorydish/<int:category_id>', CategoryDishAPIView.as_view(), name='category-dish'),
     path("dish_to_order", GetDishToOrderAPIView.as_view(), name='dish-to-order'),
     path('dish_to_order_id/<int:id>', UpdateCountDishToOrderAPIView.as_view(), name='dish_to_order_id'),
     path("order", OrderAPIView.as_view(), name='order'),
 ]
-

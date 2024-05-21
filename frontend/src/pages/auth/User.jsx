@@ -141,8 +141,8 @@ export default function User() {
                     <div className={styles["test"]}>
                         <label htmlFor="delivery_adress">Адреса доставки</label>
                         <input type="text"
-                               placeholder='Delivery adress'
-                               autoComplete='off'
+                               placeholder='Будь ласка, введіть адресу у форматі: вулиця, будинок'
+                               autoComplete='street-address'
                                className={styles["param-field"]}
                                id="delivery_adress"
                                defaultValue={delivery_address}

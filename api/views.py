@@ -1,4 +1,8 @@
+from django.http import JsonResponse
 from django.shortcuts import render
+from paypalrestsdk import Payment, configure
+import json
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions
 from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer
 
@@ -12,7 +16,8 @@ from rest_framework import exceptions as rest_exceptions, response, decorators a
 from rest_framework_simplejwt import tokens, views as jwt_views, serializers as jwt_serializers, \
     exceptions as jwt_exceptions
 from api import serializers, models
-from .service import update_user_profile
+from .service import update_user_profile, update_order
+from django.utils import timezone
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from django.views.generic import ListView
 from rest_framework.response import Response
@@ -209,7 +214,7 @@ class UserReadyDishesListView(generics.ListAPIView):
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         customer = Customer.objects.filter(user_id=user_id).first()
-        queryset = DishToOrder.objects.filter(order__user_id=customer.id, order__order_status="ready")
+        queryset = DishToOrder.objects.filter(order__user_id=customer.id, order__order_status="ready").order_by('id')
         return queryset
 
 
@@ -250,6 +255,95 @@ class DeleteOrderAPIView(APIView):
                             status=status.HTTP_404_NOT_FOUND)
 
 
+
+class ConfirmUpdateOrder(APIView):
+    def put(self, request, order_id):
+        total_price = request.data.get('totalPrice')
+        address = request.data.get('address')
+        selected_date = request.data.get('selectedDate')
+        selected_time = request.data.get('selectedTime')
+        number_people = request.data.get('numberPeople')
+        note = request.data.get('note')
+
+        success, message = update_order(order_id, total_price, address, selected_date, selected_time,
+                                        number_people,
+                                        note)
+
+        if success:
+            return Response({"message": message}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": message}, status=status.HTTP_404_NOT_FOUND)
+
+
+# Налаштування PayPal SDK
+configure({
+    'mode': 'sandbox',  # Використовуйте 'live' для продакшн середовища
+    'client_id': settings.PAYPAL_CLIENT_ID,
+    'client_secret': settings.PAYPAL_CLIENT_SECRET
+})
+
+
+@rest_decorators.api_view(['POST'])
+def create_payment(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        order_id = data.get('order_id')
+
+        # Отримуємо ордер з бази даних
+        order = get_object_or_404(Order, id=order_id)
+
+        payment = Payment({
+            "intent": "sale",
+            "payer": {
+                "payment_method": "paypal"
+            },
+            "redirect_urls": {
+                "return_url": "http://localhost:8000/payment/success/" + str(order.id),
+                "cancel_url": "http://localhost:8000/payment/cancel"
+            },
+            "transactions": [{
+                "item_list": {
+                    "items": [{
+                        "name": f"Order {order.id}",
+                        "sku": str(order.id),
+                        "price": str(order.price),
+                        "currency": "USD",
+                        "quantity": 1
+                    }]
+                },
+                "amount": {
+                    "total": str(order.price),
+                    "currency": "USD"
+                },
+                "description": order.comment or f"Payment for Order {order.id}"
+            }]
+        })
+
+        if payment.create():
+            approval_url = next((link.href for link in payment.links if link.rel == 'approval_url'), None)
+            return JsonResponse({'approval_url': approval_url})
+        else:
+            return JsonResponse({'error': payment.error}, status=500)
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+@rest_decorators.api_view(['POST'])
+def update_order_status(request):
+    data = request.data
+    order_id = data.get('order_id')
+
+    # Отримуємо ордер з бази даних
+    order = get_object_or_404(Order, id=order_id)
+
+    # Оновлюємо статус і час завершення ордера
+    order.order_status = 'paid'
+    order.end_time = timezone.now()
+    order.save()
+
+    return Response({'success': True})
+
+  
+  
 class CategoryDishAPIView(APIView):
     def get(self, request, category_id):
         try:
