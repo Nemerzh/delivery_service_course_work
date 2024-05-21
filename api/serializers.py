@@ -99,3 +99,9 @@ class DishToOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = DishToOrder
         fields = '__all__'
+
+
+class GetDishToOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DishToOrder
+        fields = '__all__'

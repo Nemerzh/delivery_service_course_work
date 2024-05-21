@@ -19,6 +19,13 @@ import ShoppingCartCheckOut from "./pages/ShoppingCartCheckOut";
 import PaymentForm from "./pages/PaymentForm";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
+import Contacts from "../public/info/Contacts";
+import AboutUs from "../public/info/AboutUs";
+import DeliveryConditions from "../public/info/DeliveryConditions";
+import News from "../public/info/News";
+import Actions from "../public/info/Actions";
+import ConfidentialityRules from "../public/info/ConfidentialityRules";
+import Info from "../public/info/Info";
 
 function App() {
     const {isLoggedIn} = useAuth();
@@ -41,7 +48,8 @@ function App() {
                     <Route path="/payment/cancel" element={<PaymentCancel />} />
                     <Route path='/auth'>
                         <Route path='login' element={!isLoggedIn ? (<Login/>) : (<Navigate replace to={"/"}/>)}></Route>
-                        <Route path='register' element={!isLoggedIn ? (<Register/>) : (<Navigate replace to={"/"}/>)}></Route>
+                        <Route path='register'
+                               element={!isLoggedIn ? (<Register/>) : (<Navigate replace to={"/"}/>)}></Route>
                         <Route path='user' element={isLoggedIn ? (<AuthMiddleware/>) : (<Navigate to={"../login"}/>)}>
                             <Route index element={isLoggedIn ? (<User/>) : (<Navigate to={"../login"}/>)}></Route>
                         </Route>
@@ -52,7 +60,15 @@ function App() {
                         <Route path='add' element={isLoggedIn ? (<FeedbackAdd/>) : (<Navigate replace to={"/"}/>)}/>
                     </Route>
 
-                  <Route path='/main' element={<MainPage />} />
+                    <Route path='/main' element={<MainPage/>}/>
+                    <Route path='/contacts' element={<Contacts/>}/>
+                    <Route path='/aboutus' element={<AboutUs/>}/>
+                    <Route path='/deliveryconditions' element={<DeliveryConditions/>}/>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='/actions' element={<Actions/>}/>
+                    <Route path='/confidentialityrules' element={<ConfidentialityRules/>}/>
+                    <Route path='/info' element={<Info/>}/>
+
                 </Route>
 
                 <Route path='*' element={<Navigate to='/'/>}></Route>
