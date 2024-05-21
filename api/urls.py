@@ -21,4 +21,8 @@ urlpatterns = [
     path('update_confirm_order/<int:order_id>', ConfirmUpdateOrder.as_view(), name='update_confirm_order'),
     path('payments/create_payment/', create_payment, name='create_payment'),
     path('payments/update_order/', update_order_status, name='update-order-status'),
+    path('categorydish/<int:category_id>', CategoryDishAPIView.as_view(), name='category-dish'),
+    path("dish_to_order", GetDishToOrderAPIView.as_view(), name='dish-to-order'),
+    path('dish_to_order_id/<int:id>', UpdateCountDishToOrderAPIView.as_view(), name='dish_to_order_id'),
+    path("order", OrderAPIView.as_view(), name='order'),
 ]

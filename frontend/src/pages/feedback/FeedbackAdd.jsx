@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import axios from 'axios';
 import useUser from '../../hooks/useUser';
-import {axiosPrivateInstance} from "../../api/apiConfig";
+import {axiosInstance, axiosPrivateInstance} from "../../api/apiConfig";
 import useAuth from "../../hooks/useAuth";
+import * as styles from "../main/main.module.css";
 
 
 function FeedbackAdd() {
@@ -11,22 +12,23 @@ function FeedbackAdd() {
     const [hover, setHover] = useState(null);
     const [totalStars, setTotalStars] = useState(5);
     const [reviewText, setReviewText] = useState('');
-    const { user } = useAuth()
+    const {user} = useAuth()
     const getUser = useUser()
 
-    useEffect(()=>{
+    useEffect(() => {
         getUser()
-    },[])
+    }, [])
 
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
         try {
+            const cust = await axiosInstance.get(`/api/customer/${user.id}`);
             await axios.post('http://localhost:8000/api/feedback', {
                 rating: rating,
                 review_text: reviewText,
-                user: user.id,
+                user: cust.data.id,
                 review_date: new Date().toISOString(),
             });
 
@@ -44,10 +46,28 @@ function FeedbackAdd() {
     };
 
     return (
-        <div className="feedback-page2">
-            <div className="feedback-container2">
-                <h1>Add feedback</h1>
-                <hr />
+        <div className="feedback-page">
+            <div className={styles.banner}>
+                <div className={styles["banner-head"]}>
+                    <img className={styles["head-logo"]} src="../../../static/images/3.png" alt="Fooddelivery"/>
+                </div>
+                <div className={styles["banner-body"]}>
+                    <NavLink to="/main" className={styles["button-banner"]}>
+                        Меню
+                    </NavLink>
+                    <NavLink to="/feedback/list" className={`${styles["button-banner"]} ${styles["active"]}`}>
+                        Відгуки
+                    </NavLink>
+                    <a href="#" className={styles["button-banner"]}>Історія</a>
+                    <NavLink to="/info" className={`${styles["button-banner"]}`}>
+                        Інфо
+                    </NavLink>
+                </div>
+            </div>
+
+            <div className="feedback-container">
+                <h1>Залишити відгук</h1>
+                <hr/>
 
                 <div>
                     {[...Array(totalStars)].map((star, index) => {
@@ -86,14 +106,14 @@ function FeedbackAdd() {
                         className="feedback-textarea"
                         required
                     />
-                    <br />
+                    <br/>
 
                     <div className="button-container">
                         <button type="submit" className="submit-button">
-                            Submit
+                            Готово
                         </button>
                         <NavLink to="/feedback/list" className="submit-button">
-                            Back
+                            Назад
                         </NavLink>
                     </div>
                 </form>
