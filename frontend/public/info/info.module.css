@@ -9,6 +9,7 @@
     border-radius: 16px;
     box-shadow: 2px 0 3px rgba(0, 0, 0, 0.2), -2px 0 3px rgba(0, 0, 0, 0.2);
 }
+
 hr {
     width: 70%;
     margin: 10px auto;
@@ -16,10 +17,14 @@ hr {
     height: 2px;
     background-color: black;
 }
-h1, h2 {
-  text-align: left;
-  margin-bottom: 32px;
+
+h2 {
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 4px;
+    font-size: 24px;
 }
+
 .main-text {
     font-family: Arial, sans-serif;
     width: 100%;
@@ -29,5 +34,17 @@ h1, h2 {
     margin: 0 0 1em 0;
     padding: 0;
     text-align: left;
+}
+.nav-link {
+    display: block;
+    font-size: 24px;
+    color: black;
+    text-align: left;
+    text-decoration: none;
+    padding-left: 25px;
+}
+
+.nav-link:hover {
+    color: #555;
 }
 

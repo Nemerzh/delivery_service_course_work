@@ -19,28 +19,32 @@ export default function ContactPage() {
                         Відгуки
                     </NavLink>
                     <a href="#" className={bannerStyles["button-banner"]}>Історія</a>
-                    <NavLink to="/info" className={`${bannerStyles["button-banner"]}`}>
-                        Інфо
-                    </NavLink>
+                    <a href="#" className={`${bannerStyles["button-banner"]} ${bannerStyles["active"]}`}>Інфо</a>
                 </div>
             </div>
 
             <div className="feedback-container">
-                <h1>Контакти</h1>
+                <h1>Інформація</h1>
                 <p className={styles["main-text"]}>
-                    <br/> Якщо у вас є запитання або пропозиції, зв'яжіться з нами за наступними контактами: <br/>
-
-                    <strong>Email:</strong> info@example.com<br/>
-
-                    <strong>Телефон:</strong> +38 012 345 67 89<br/>
-
-                    <strong>Адреса:</strong> Адреса: вулиця Прикладна, 123, Місто, Країна<br/>
-
-                    <strong>Години роботи:</strong> <br/>
-                    <strong>·</strong> Понеділок - П'ятниця: 9:00 - 18:00 <br/>
-                    <strong>·</strong> Субота: 10:00 - 14:00 <br/>
-                    <strong>·</strong> Неділя: вихідний <br/>
-                    Ми завжди раді вам допомогти та відповісти на всі ваші запитання! <br/>
+                    <br/>
+                    <NavLink to="/aboutus" className={styles["nav-link"]}>
+                        Про нас
+                    </NavLink>
+                    <NavLink to="/contacts" className={styles["nav-link"]}>
+                        Контакти
+                    </NavLink>
+                    <NavLink to="/actions" className={styles["nav-link"]}>
+                        Акції
+                    </NavLink>
+                    <NavLink to="/confidentialityrules" className={styles["nav-link"]}>
+                        Правила конфеденційності
+                    </NavLink>
+                    <NavLink to="/deliveryconditions" className={styles["nav-link"]}>
+                        Умови доставки
+                    </NavLink>
+                    <NavLink to="/news" className={styles["nav-link"]}>
+                        Новини
+                    </NavLink>
                 </p>
             </div>
         </div>

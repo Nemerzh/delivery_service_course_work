@@ -16,6 +16,12 @@ import ShoppingCart from "./pages/ShoppingCart"
 import useAuth from "./hooks/useAuth";
 import MainPage from "./pages/main/MainPage";
 import Contacts from "../public/info/Contacts";
+import AboutUs from "../public/info/AboutUs";
+import DeliveryConditions from "../public/info/DeliveryConditions";
+import News from "../public/info/News";
+import Actions from "../public/info/Actions";
+import ConfidentialityRules from "../public/info/ConfidentialityRules";
+import Info from "../public/info/Info";
 
 function App() {
     const {isLoggedIn} = useAuth();
@@ -48,6 +54,12 @@ function App() {
 
                     <Route path='/main' element={<MainPage/>}/>
                     <Route path='/contacts' element={<Contacts/>}/>
+                    <Route path='/aboutus' element={<AboutUs/>}/>
+                    <Route path='/deliveryconditions' element={<DeliveryConditions/>}/>
+                    <Route path='/news' element={<News/>}/>
+                    <Route path='/actions' element={<Actions/>}/>
+                    <Route path='/confidentialityrules' element={<ConfidentialityRules/>}/>
+                    <Route path='/info' element={<Info/>}/>
                 </Route>
 
                 <Route path='*' element={<Navigate to='/'/>}></Route>

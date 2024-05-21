@@ -191,7 +191,9 @@ export default function MainPage() {
                         Відгуки
                     </NavLink>
                     <a href="#" className={styles["button-banner"]}>Історія</a>
-                    <a href="#" className={styles["button-banner"]}>Інфо</a>
+                    <NavLink to="/info" className={`${styles["button-banner"]}`}>
+                        Інфо
+                    </NavLink>
                     <button onClick={toggleSearch} className={styles["button-banner"]}>Пошук</button>
                 </div>
             </div>

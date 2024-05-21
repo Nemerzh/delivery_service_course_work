@@ -25,19 +25,19 @@ export default function Footer(props) {
                     <div className="footer-supported-content" id="navbarSupportedContent1">
                         <ul className="navbar-nav footer-supported-content">
                             <li className="nav-item me-3 me-lg-0">
-                                <Link to="https://www.facebook.com/?locale=uk_UA" className="nav-link"><p
+                                <Link to="http://localhost:8000/actions" className="nav-link"><p
                                     className="top-footer-label">Акції</p></Link>
                             </li>
                             <li className="nav-item me-3 me-lg-0">
-                                <Link to="https://www.facebook.com/?locale=uk_UA" className="nav-link"><p
+                                <Link to="http://localhost:8000/news" className="nav-link"><p
                                     className="top-footer-label">Новини</p></Link>
                             </li>
                             <li className="nav-item me-3 me-lg-0">
-                                <Link to="https://www.facebook.com/?locale=uk_UA" className="nav-link"><p
+                                <Link to="http://localhost:8000/aboutus" className="nav-link"><p
                                     className="top-footer-label">Про нас</p></Link>
                             </li>
                             <li className="nav-item me-3 me-lg-0">
-                                <Link to="https://www.facebook.com/?locale=uk_UA" className="nav-link"><p
+                                <Link to="http://localhost:8000/deliveryconditions" className="nav-link"><p
                                     className="top-footer-label">Умови доставки</p></Link>
                             </li>
                             <li className="nav-item me-3 me-lg-0">
@@ -49,7 +49,7 @@ export default function Footer(props) {
                                     className="top-footer-label">Підтримка</p></Link>
                             </li>
                             <li className="nav-item me-3 me-lg-0">
-                                <Link to="https://www.facebook.com/?locale=uk_UA" className="nav-link"><p
+                                <Link to="http://localhost:8000/confidentialityrules" className="nav-link"><p
                                     className="top-footer-label">Правила конфіденційності</p></Link>
                             </li>
                         </ul>

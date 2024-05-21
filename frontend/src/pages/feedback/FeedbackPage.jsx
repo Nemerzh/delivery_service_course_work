@@ -65,7 +65,9 @@ function FeedbackPage() {
                     </NavLink>
                     <a className={`${styles["button-banner"]} ${styles["active"]}`}>Відгуки</a>
                     <a href="#" className={styles["button-banner"]}>Історія</a>
-                    <a href="#" className={styles["button-banner"]}>Інфо</a>
+                    <NavLink to="/info" className={`${styles["button-banner"]}`}>
+                        Інфо
+                    </NavLink>
                 </div>
             </div>
 
