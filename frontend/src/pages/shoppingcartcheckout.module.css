@@ -1,0 +1,251 @@
+.main-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    height: 100%;
+    min-height: calc(100vh - 334px);
+    margin: 25px auto 50px;
+}
+
+.left-container {
+    margin-right: 16px;
+}
+
+.shadow-container {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    width: 380px;
+    border-radius: 10px;
+}
+
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 500px;
+    background: #D9D9D9;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+
+    max-height: 70vh;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+}
+
+.cart-container::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+.cart-container::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8;
+    border-radius: 10px;
+}
+
+.h4-cart {
+
+}
+
+.top-part-cart-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 7px;
+}
+
+.delete-icon {
+    cursor: pointer;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border: solid 1px #767676;
+    width: 80%;
+    height: 100px;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+}
+
+.card-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 80%;
+}
+
+.control-item {
+    cursor: pointer;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: #D9D9D9;
+    border-radius: 0 0 10px 10px;
+    border-top: solid 1px #767676;
+    padding: 10px;
+}
+
+
+.to-menu {
+    width: 60%;
+    border: solid 1px #767676;
+    border-radius: 10px;
+    background: white;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.right-container {
+    width: 100%;
+    height: 550px;
+    border-radius: 10px 10px 0 0;
+    padding: 0 10px 10px 10px;
+
+    max-height: 80vh;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.right-container::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+.right-container::-webkit-scrollbar-thumb {
+    background-color: #a8a8a8;
+    border-radius: 10px;
+}
+
+.order-add-info-container {
+    background: #D9D9D9;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.header-btn {
+    background: #8DBCE7;
+    width: max-content;
+    border-radius: 32px;
+    padding: 5px 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.delivery-input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.param-field {
+    flex: 1;
+    padding: 5px 5px 5px 15px;
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    font-size: 14px;
+
+    outline: none;
+    transition: all 0.2s ease-in-out 0s;
+    font-weight: 400;
+    background: transparent;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    max-width: 100%;
+}
+
+.input-fields {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #989898;
+    margin-bottom: 10px;
+}
+
+.bottom-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bottom-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-info-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 550;
+}
+
+.data-time-input {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.data-time-input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+    border-bottom: 1px solid #989898;
+}
+
+.confirm {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.to-confirm {
+    width: 30%;
+    border: solid 1px #767676;
+    border-radius: 10px;
+    background: #8DBCE7;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    height: 40px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+}
+
+.no-style {
+    all: unset;
+}

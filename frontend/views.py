@@ -25,10 +25,17 @@ def login(request, *args, **kwargs):
 def shoppingcart(request, *args, **kwargs):
     return render(request, 'frontend/shoppingcart.html')
 
-
 def main(request, *args, **kwargs):
     return render(request, 'frontend/main.html')
 
 
 def info(request, *args, **kwargs):
     return render(request, 'frontend/info.html')
+
+
+def checkout(request, *args, **kwargs):
+    return render(request, 'frontend/checkout.html')
+
+
+def payment(request, *args, **kwargs):
+    return render(request, 'frontend/payment.html')

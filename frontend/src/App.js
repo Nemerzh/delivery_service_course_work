@@ -15,6 +15,10 @@ import FeedbackAdd from "./pages/feedback/FeedbackAdd";
 import ShoppingCart from "./pages/ShoppingCart"
 import useAuth from "./hooks/useAuth";
 import MainPage from "./pages/main/MainPage";
+import ShoppingCartCheckOut from "./pages/ShoppingCartCheckOut";
+import PaymentForm from "./pages/PaymentForm";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 import Contacts from "../public/info/Contacts";
 import AboutUs from "../public/info/AboutUs";
 import DeliveryConditions from "../public/info/DeliveryConditions";
@@ -38,6 +42,10 @@ function App() {
                 <Route path='/' element={<PersistLogin/>}>
                     <Route index exact element={<Home/>}></Route>
                     <Route path="shoppingcart" element={<ShoppingCart/>}></Route>
+                    <Route path="checkout" element={<ShoppingCartCheckOut/>}></Route>
+                    <Route path="payment/:orderId" element={<PaymentForm />}></Route>
+                    <Route path="/payment/success/:orderId" element={<PaymentSuccess />} />
+                    <Route path="/payment/cancel" element={<PaymentCancel />} />
                     <Route path='/auth'>
                         <Route path='login' element={!isLoggedIn ? (<Login/>) : (<Navigate replace to={"/"}/>)}></Route>
                         <Route path='register'
@@ -60,6 +68,7 @@ function App() {
                     <Route path='/actions' element={<Actions/>}/>
                     <Route path='/confidentialityrules' element={<ConfidentialityRules/>}/>
                     <Route path='/info' element={<Info/>}/>
+
                 </Route>
 
                 <Route path='*' element={<Navigate to='/'/>}></Route>

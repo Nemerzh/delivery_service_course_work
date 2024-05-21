@@ -62,7 +62,6 @@ class FeedbackSerializer(serializers.ModelSerializer):
         try:
             customer = Customer.objects.get(feedback=obj)
             user = customer.user
-
             return user.first_name
         except Customer.DoesNotExist:
             return None
