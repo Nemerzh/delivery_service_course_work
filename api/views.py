@@ -4,9 +4,10 @@ from paypalrestsdk import Payment, configure
 import json
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions
-from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer
+from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer, DeliverySerializer, \
+    CourierSerializer
 
-from api.models import Category, User, Feedback
+from api.models import Category, User, Feedback, Delivery, Courier
 
 from django.contrib.auth import authenticate
 from django.conf import settings
@@ -26,6 +27,7 @@ from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerial
     DishToOrderSerializer, DishSerializer, OrderSerializer, GetDishToOrderSerializer
 from rest_framework.views import APIView
 from api.models import Category, User, Feedback, Customer, DishToOrder, Order, Dish
+from rest_framework.generics import RetrieveUpdateAPIView
 
 
 def get_user_tokens(user):
@@ -391,3 +393,31 @@ class UpdateCountDishToOrderAPIView(generics.UpdateAPIView):
         instance.save()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+
+class DeliveryAPIView(generics.ListCreateAPIView):
+    queryset = Delivery.objects.all()
+    serializer_class = DeliverySerializer
+
+
+class UpdateDeliveryAPIView(RetrieveUpdateAPIView):
+    queryset = Delivery.objects.all()
+    serializer_class = DeliverySerializer
+
+    def put(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+
+class CourierAPIView(generics.ListCreateAPIView):
+    queryset = Courier.objects.all()
+    serializer_class = CourierSerializer
+
+
+class UserAPIView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+

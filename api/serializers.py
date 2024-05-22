@@ -105,3 +105,15 @@ class GetDishToOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = DishToOrder
         fields = '__all__'
+
+
+class DeliverySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Delivery
+        fields = '__all__'
+
+
+class CourierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Courier
+        fields = '__all__'

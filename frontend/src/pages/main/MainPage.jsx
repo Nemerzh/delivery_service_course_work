@@ -6,7 +6,7 @@ import axios from 'axios';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import {NavLink} from "react-router-dom";
+import {NavLink, Navigate} from "react-router-dom";
 import {axiosInstance} from "../../api/apiConfig";
 import {Modal} from "@mui/material";
 import useAuth from "../../hooks/useAuth";
@@ -26,6 +26,7 @@ export default function MainPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredDishes, setFilteredDishes] = useState([]);
     const [showSearch, setShowSearch] = useState(false);
+
 
     const toggleSearch = () => {
         setShowSearch(prevShowSearch => !prevShowSearch);
@@ -80,6 +81,11 @@ export default function MainPage() {
     };
 
     const handleAddToOrder = async () => {
+        if (!user.id) {
+            window.location.href = 'http://localhost:8000/auth/login';
+            return
+        }
+
         try {
             const response = await axiosInstance.get('/api/order', {
                 params: {
@@ -88,8 +94,9 @@ export default function MainPage() {
                 }
             });
             let order;
+            const lastIndex = response.data.length - 1;
 
-            if (response.data.length === 0) {
+            if (response.data.length === 0 || response.data[lastIndex].order_status !== 'ready') {
                 const cust = await axiosInstance.get(`/api/customer/${user.id}`);
                 const orderData = {
                     user: cust.data.id,
@@ -234,7 +241,7 @@ export default function MainPage() {
                         onChange={handleSearchChange}
                     />
                     <button type="submit" className={styles["search-button"]} onClick={handleSearchSubmit}>
-                        <SearchIcon />
+                        <SearchIcon/>
                     </button>
                 </div>
             )}
