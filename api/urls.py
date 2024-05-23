@@ -26,4 +26,9 @@ urlpatterns = [
     path('dish_to_order_id/<int:id>', UpdateCountDishToOrderAPIView.as_view(), name='dish_to_order_id'),
     path("order/<int:user_id>", OrderAPIView.as_view(), name='order'),
     path('order/detail/<int:pk>', OrderDetailAPIView.as_view(), name='order-detail'),
+    path("order", OrderAPIView.as_view(), name='order'),
+    path("courier", CourierAPIView.as_view(), name='courier'),
+    path("delivery/<int:courier_id>/<str:delivery_status>/", DeliveryAPIView.as_view(), name='delivery'),
+    path("delivery/<int:pk>", UpdateDeliveryAPIView.as_view(), name='update_delivery_detail'),
+    path("getuser", UserAPIView.as_view(), name='user'),
 ]

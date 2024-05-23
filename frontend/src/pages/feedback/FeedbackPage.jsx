@@ -11,8 +11,8 @@ function FeedbackPage() {
     const [page, setPage] = useState(1);
     const commentsPerPage = 5;
     const {isLoggedIn} = useAuth();
-
     const minId = comments.length > 0 ? comments[comments.length - 1].id : null;
+    const linkTo = isLoggedIn ? "/feedback/add" : "/auth/login";
 
     useEffect(() => {
         if (page > 1 && minId <= 1) {
@@ -75,15 +75,9 @@ function FeedbackPage() {
                 <h1>Відгуки</h1>
                 <hr/>
 
-                {isLoggedIn ? (
-                    <NavLink to="/feedback/add" className="add-comment-cell">
-                        Додати відгук
-                    </NavLink>
-                ) : (
-                    <div className="add-comment-cell">
-                        Авторизуйтесь щоб залишити відгук
-                    </div>
-                )}
+                <NavLink to={linkTo} className="add-comment-cell">
+                    Додати відгук
+                </NavLink>
 
                 {comments.map(comment => (
                     <div key={comment.id} className="comment-cell">

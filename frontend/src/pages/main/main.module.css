@@ -129,6 +129,7 @@
     width: 100%;
     grid-auto-rows: min-content;
     align-items: flex-start;
+    cursor: pointer;
 }
 
 section {
