@@ -32,7 +32,7 @@ function App() {
     const {isLoggedIn} = useAuth();
     const location = useLocation();
     let isNavbarVisible = true;
-    if (location.pathname === '/auth/register' || location.pathname === '/auth/login') {
+    if (location.pathname === '/auth/register' || location.pathname === '/auth/login' || location.pathname === '/availableorders') {
         isNavbarVisible = false;
     }
 

@@ -189,6 +189,7 @@ class LastFiveFeedbacksView(generics.ListAPIView):
 
         return queryset
 
+
 class UpdateUserProfile(APIView):
     def put(self, request, user_id):
         phone_number = request.data.get('phone_number')
@@ -255,7 +256,6 @@ class DeleteOrderAPIView(APIView):
         else:
             return Response({"error": "No orders found with status 'ready' for the specified user."},
                             status=status.HTTP_404_NOT_FOUND)
-
 
 
 class ConfirmUpdateOrder(APIView):
@@ -344,8 +344,7 @@ def update_order_status(request):
 
     return Response({'success': True})
 
-  
-  
+
 class CategoryDishAPIView(APIView):
     def get(self, request, category_id):
         try:
@@ -395,9 +394,14 @@ class UpdateCountDishToOrderAPIView(generics.UpdateAPIView):
         return Response(serializer.data)
 
 
-class DeliveryAPIView(generics.ListCreateAPIView):
-    queryset = Delivery.objects.all()
-    serializer_class = DeliverySerializer
+class DeliveryAPIView(APIView):
+    def get(self, request, courier_id, delivery_status):
+        if courier_id and delivery_status:
+            deliveries = Delivery.objects.filter(courier_id=courier_id, delivery_status=delivery_status)
+            serializer = DeliverySerializer(deliveries, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
 
 
 class UpdateDeliveryAPIView(RetrieveUpdateAPIView):
@@ -420,4 +424,3 @@ class CourierAPIView(generics.ListCreateAPIView):
 class UserAPIView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-

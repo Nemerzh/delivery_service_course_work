@@ -108,9 +108,20 @@ class GetDishToOrderSerializer(serializers.ModelSerializer):
 
 
 class DeliverySerializer(serializers.ModelSerializer):
+    user_phone_number = serializers.SerializerMethodField()
+
     class Meta:
         model = Delivery
         fields = '__all__'
+
+    def get_user_phone_number(self, obj):
+        try:
+            order = Order.objects.get(id=obj.current_order_id)
+            customer_id = order.user_id
+            customer = Customer.objects.get(id=customer_id)
+            return str(customer.user.phone_number)
+        except Order.DoesNotExist:
+            return None
 
 
 class CourierSerializer(serializers.ModelSerializer):

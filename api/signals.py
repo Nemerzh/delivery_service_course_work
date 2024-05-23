@@ -34,3 +34,14 @@ def create_delivery_on_order_paid(sender, instance, created, **kwargs):
             delivery_address=instance.parse_delivery_address(),  # Використовуйте правильну адресу доставки
             delivery_status="in_delivery"
         )
+
+
+@receiver(post_save, sender=Delivery)
+def update_order_status(sender, instance, **kwargs):
+    if instance.current_order_id:
+        try:
+            order = Order.objects.get(id=instance.current_order_id)
+            order.order_status = instance.delivery_status
+            order.save()
+        except Order.DoesNotExist:
+            pass
