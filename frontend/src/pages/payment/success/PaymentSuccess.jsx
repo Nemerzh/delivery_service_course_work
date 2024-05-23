@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {useParams, useSearchParams} from 'react-router-dom';
-import {axiosInstance} from "../api/apiConfig";
+import React, { useState, useEffect } from 'react';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { axiosInstance } from "../../../api/apiConfig";
+import * as style from "./paymentsuccess.module.css"
 
 export default function PaymentSuccess() {
-    const {orderId} = useParams();
+    const { orderId } = useParams();
     const [message, setMessage] = useState('');
     const [searchParams] = useSearchParams();
     const paymentId = searchParams.get('paymentId');
@@ -13,7 +14,7 @@ export default function PaymentSuccess() {
     const updateOrderStatus = async () => {
         try {
             const response = await axiosInstance.post('api/payments/update_order/', {
-                order_id: orderId,
+                order_id: orderId
             });
             if (response.data.success) {
                 setMessage('Замовлення успішно оновлено');
@@ -28,15 +29,19 @@ export default function PaymentSuccess() {
 
     useEffect(() => {
         updateOrderStatus();
-    }, []);  // Порожній масив означає, що цей ефект виконується лише один раз після першого рендеру
+    }, []);  // Empty array means this effect runs only once after the first render
 
     return (
-        <div>
+        <div className={style["payment-success-container"]}>
             <h2>Оплата успішна!</h2>
-            <p>Payment ID: {paymentId}</p>
-            <p>Token: {token}</p>
-            <p>Payer ID: {PayerID}</p>
-            <p>{message}</p>
+            <div className={style["payment-details"]}>
+                <p>Замовлення #{orderId}</p>
+                <p>Успішно оплачене</p>
+                <p>Електроний чек надіслано на пошту</p>
+            </div>
+            <button className={style["payment-button"]} onClick={() => window.location.href = '/'}>
+                Повернутися на головну
+            </button>
         </div>
     );
-};
+}

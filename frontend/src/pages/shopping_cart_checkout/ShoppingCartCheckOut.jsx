@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
-import useLogout from '../hooks/useLogout';
-import useUser from '../hooks/useUser';
+import useAuth from '../../hooks/useAuth';
+import useLogout from '../../hooks/useLogout';
+import useUser from '../../hooks/useUser';
 import * as styles from './shoppingcartcheckout.module.css';
-import {axiosInstance} from '../api/apiConfig';
+import {axiosInstance} from '../../api/apiConfig';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
@@ -156,7 +156,7 @@ export default function ShoppingCartCheckOut() {
             });
 
             // Handle successful response here if needed
-            navigate(`/payment/${dishes[0].order.id}`);
+            navigate(`/payment/${dishes[0].order.id}/${totalPrice}`);
         } catch (error) {
             console.error('Error submitting the form:', error);
             // Handle error here if needed

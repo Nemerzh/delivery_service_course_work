@@ -294,6 +294,9 @@ def create_payment(request):
         # Отримуємо ордер з бази даних
         order = get_object_or_404(Order, id=order_id)
 
+        if order.order_status != 'ready':
+            return JsonResponse({'error': 'Order is not ready for payment'}, status=400)
+
         payment = Payment({
             "intent": "sale",
             "payer": {
@@ -337,12 +340,16 @@ def update_order_status(request):
     # Отримуємо ордер з бази даних
     order = get_object_or_404(Order, id=order_id)
 
-    # Оновлюємо статус і час завершення ордера
-    order.order_status = 'paid'
-    order.end_time = timezone.now()
-    order.save()
+    # Перевіряємо поточний статус ордера
+    if order.order_status == 'ready':
+        # Оновлюємо статус і час завершення ордера
+        order.order_status = 'paid'
+        order.end_time = timezone.now()
+        order.save()
+        return Response({'success': True})
+    else:
+        return Response({'error': 'Order is not in ready status'}, status=400)
 
-    return Response({'success': True})
 
 
 class CategoryDishAPIView(APIView):
@@ -376,7 +383,18 @@ class GetDishToOrderAPIView(generics.ListCreateAPIView):
         return super().get(request, *args, **kwargs)
 
 
-class OrderAPIView(generics.ListCreateAPIView):
+class OrderAPIView(APIView):
+    def get(self, request, user_id):
+        try:
+            customer = Customer.objects.filter(user_id=user_id).first()
+            queryset = Order.objects.filter(user=customer).exclude(order_status='ready')
+            serializer = OrderSerializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Dish.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class OrderDetailAPIView(generics.RetrieveAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
