@@ -16,10 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from dotenv import load_dotenv
+from decouple import config
+
+load_dotenv()
 from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(config("ADMIN_SITE") + '/', admin.site.urls),
     path('api/', include('api.urls')),
     path('', include('frontend.urls')),
 ]

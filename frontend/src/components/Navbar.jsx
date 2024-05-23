@@ -68,7 +68,7 @@ export default function Navbar(props) {
                         <Link to="/feedback/list" onClick={closeMenu}>Відгуки</Link>
                     </li>
                     <li>
-                        <Link to="" onClick={closeMenu}>Історія замовлень</Link>
+                        <Link to="order_history" onClick={closeMenu}>Історія замовлень</Link>
                     </li>
                     <li>
                         <Link to="" onClick={closeMenu}>Підтримка</Link>

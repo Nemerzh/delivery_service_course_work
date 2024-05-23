@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {axiosInstance} from "../api/apiConfig";
+import {axiosInstance} from "../../../api/apiConfig";
 import {useParams} from "react-router-dom";
+import * as styles from './paymentform.module.css';
 
 export default function PaymentForm() {
     const {orderId} = useParams();  // Отримання order_id з URL параметрів
+    const {totalPrice} = useParams();  // Отримання order_id з URL параметрів
     const [message, setMessage] = useState('');
 
     const handlePayment = async () => {
@@ -23,10 +25,12 @@ export default function PaymentForm() {
     };
 
     return (
-        <div>
-            <h2>Оплата</h2>
-            <button onClick={handlePayment}>Оплатити з PayPal</button>
+        <div className={styles["payment-container"]}>
+            <h1>Оплата</h1>
+            <h5>Замовлення #{orderId}</h5>
+            <h5>На суму {totalPrice} грн</h5>
+            <button className={styles['payment-button']} onClick={handlePayment}>Оплатити з PayPal</button>
             {message && <p>{message}</p>}
         </div>
     );
-};
+}

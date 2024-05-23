@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {Navigate, useNavigate} from "react-router-dom"
-import useAuth from '../hooks/useAuth'
-import useLogout from "../hooks/useLogout"
-import useUser from '../hooks/useUser'
+import useAuth from '../../hooks/useAuth'
+import useLogout from "../../hooks/useLogout"
+import useUser from '../../hooks/useUser'
 import * as styles from './shoppingcart.module.css'
-import {axiosInstance} from "../api/apiConfig";
+import {axiosInstance} from "../../api/apiConfig";
 import {toast} from "react-toastify";
 
 import DeleteIcon from '@mui/icons-material/Delete';
