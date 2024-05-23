@@ -248,7 +248,7 @@ export default function MainPage() {
                             setSelectedProduct(dish);
                         }}>
                             <div className={styles["goods-header"]}>
-                                <img className={styles["goods-img"]} src="../../../static/images/product.png"
+                                <img className={styles["goods-img"]} src={dish.image_url}
                                      alt={dish.name}/>
                             </div>
                             <div className={styles["goods-body"]}>

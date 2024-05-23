@@ -32,5 +32,5 @@ def create_delivery_on_order_paid(sender, instance, created, **kwargs):
             start_time=instance.start_time,
             end_time=instance.end_time,
             delivery_address=instance.parse_delivery_address(),  # Використовуйте правильну адресу доставки
-            delivery_status="pending"
+            delivery_status="in_delivery"
         )

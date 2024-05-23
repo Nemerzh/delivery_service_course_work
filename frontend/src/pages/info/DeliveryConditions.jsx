@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
-import * as bannerStyles from "../../src/pages/main/main.module.css";
+import * as bannerStyles from "../main/main.module.css";
 import * as styles from './info.module.css';
 
 export default function ContactPage() {

@@ -1,0 +1,43 @@
+.history-container {
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 334px);
+    width: 50%;
+    margin: 25px auto 50px;
+    flex-direction: column;
+    text-align: center;
+    background: #D9D9D9;
+    border-radius: 10px;
+    border: solid 1px #767676;
+}
+
+table {
+  width: 80%; /* Ширина таблиці на 100% */
+  border-collapse: collapse; /* Видалити межі між комірками */
+}
+
+/* Стилізація заголовків таблиці */
+th {
+  background-color: #acacac; /* Сірий фон заголовків */
+  text-align: center; /* Вирівнювання тексту по центру */
+  padding: 10px; /* Додати внутрішній відступ */
+  border: 1px solid #686868; /* Додати межу */
+}
+
+/* Стилізація тіла таблиці */
+td {
+  padding: 5px; /* Додати внутрішній відступ */
+  border: 1px solid #686868; /* Додати межу */
+}
+
+/* Стилізація рядків таблиці */
+tr:nth-child(even) {
+  background-color: #f5f5f5; /* Світло-сірий фон для парних рядків */
+}
+
+/* Стилізація посилань на деталі замовлення */
+a {
+  color: #237dc6; /* Синій колір для посилань */
+  text-decoration: none; /* Видалити підкреслення */
+    font-weight: 500;
+}

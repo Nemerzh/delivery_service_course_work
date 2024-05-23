@@ -25,6 +25,7 @@ def login(request, *args, **kwargs):
 def shoppingcart(request, *args, **kwargs):
     return render(request, 'frontend/shoppingcart.html')
 
+
 def main(request, *args, **kwargs):
     return render(request, 'frontend/main.html')
 
@@ -39,3 +40,7 @@ def checkout(request, *args, **kwargs):
 
 def payment(request, *args, **kwargs):
     return render(request, 'frontend/payment.html')
+
+
+def order_history(request, *args, **kwargs):
+    return render(request, 'frontend/order_history.html')

@@ -24,5 +24,6 @@ urlpatterns = [
     path('categorydish/<int:category_id>', CategoryDishAPIView.as_view(), name='category-dish'),
     path("dish_to_order", GetDishToOrderAPIView.as_view(), name='dish-to-order'),
     path('dish_to_order_id/<int:id>', UpdateCountDishToOrderAPIView.as_view(), name='dish_to_order_id'),
-    path("order", OrderAPIView.as_view(), name='order'),
+    path("order/<int:user_id>", OrderAPIView.as_view(), name='order'),
+    path('order/detail/<int:pk>', OrderDetailAPIView.as_view(), name='order-detail'),
 ]
