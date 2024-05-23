@@ -38,6 +38,9 @@ def checkout(request, *args, **kwargs):
     return render(request, 'frontend/checkout.html')
 
 
+def courier(request, *args, **kwargs):
+    return render(request, 'frontend/courier.html')
+
 def payment(request, *args, **kwargs):
     return render(request, 'frontend/payment.html')
 

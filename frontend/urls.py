@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, register, login, feedback, profile, shoppingcart, main, info, checkout, payment, order_history
+from .views import index, register, login, feedback, profile, shoppingcart, main, info, checkout, payment, order_history, courier
 
 
 urlpatterns = [
@@ -25,4 +25,5 @@ urlpatterns = [
     path('info', info),
     path('order_history', order_history),
     path('order_history/detail/<int:order_id>', order_history),
+    path('availableorders', courier),
 ]

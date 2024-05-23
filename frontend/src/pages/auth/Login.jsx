@@ -24,6 +24,25 @@ export default function Login() {
         setPassword(event.target.value)
     }
 
+    async function checkIfCourier(userId) {
+        try {
+            const responseCouriers = await axiosInstance.get('/api/courier');
+            const couriers = responseCouriers.data;
+
+            const responseUser = await axiosInstance.get('/api/getuser');
+            const user = responseUser.data.filter(user => user.email === email);
+
+            if (couriers.some(courier => courier.user === user[0].id)) {
+                navigate('/availableorders');
+            } else {
+                navigate('/');
+            }
+        } catch (error) {
+            console.error('Error fetching couriers:', error);
+            navigate('/');
+        }
+    }
+
     async function onSubmitForm(event) {
         event.preventDefault()
 
@@ -42,7 +61,7 @@ export default function Login() {
             setPassword()
             setLoading(false)
 
-            navigate(fromLocation, {replace: true})
+            await checkIfCourier(response?.data?.user?.id);
 
         } catch (error) {
             setLoading(false)
