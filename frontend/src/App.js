@@ -19,19 +19,20 @@ import ShoppingCartCheckOut from "./pages/ShoppingCartCheckOut";
 import PaymentForm from "./pages/PaymentForm";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
-import Contacts from "../public/info/Contacts";
-import AboutUs from "../public/info/AboutUs";
-import DeliveryConditions from "../public/info/DeliveryConditions";
-import News from "../public/info/News";
-import Actions from "../public/info/Actions";
-import ConfidentialityRules from "../public/info/ConfidentialityRules";
-import Info from "../public/info/Info";
+import Contacts from "./pages/info/Contacts";
+import AboutUs from "./pages/info/AboutUs";
+import DeliveryConditions from "./pages/info/DeliveryConditions";
+import News from "./pages/info/News";
+import Actions from "./pages/info/Actions";
+import ConfidentialityRules from "./pages/info/ConfidentialityRules";
+import Info from "./pages/info/Info";
+import AvailableOrders from "./pages/courier/AvailableOrders";
 
 function App() {
     const {isLoggedIn} = useAuth();
     const location = useLocation();
     let isNavbarVisible = true;
-    if (location.pathname === '/auth/register' || location.pathname === '/auth/login') {
+    if (location.pathname === '/auth/register' || location.pathname === '/auth/login' || location.pathname === '/availableorders') {
         isNavbarVisible = false;
     }
 
@@ -69,6 +70,7 @@ function App() {
                     <Route path='/confidentialityrules' element={<ConfidentialityRules/>}/>
                     <Route path='/info' element={<Info/>}/>
 
+                    <Route path='/availableorders' element={<AvailableOrders/>}/>
                 </Route>
 
                 <Route path='*' element={<Navigate to='/'/>}></Route>

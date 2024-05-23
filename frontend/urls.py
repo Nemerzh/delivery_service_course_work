@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, register, login, feedback, profile, shoppingcart, main, info, checkout, payment
+from .views import index, register, login, feedback, profile, shoppingcart, main, info, checkout, payment, courier
 
 
 urlpatterns = [
@@ -23,4 +23,5 @@ urlpatterns = [
     path('actions', info),
     path('confidentialityrules', info),
     path('info', info),
+    path('availableorders', courier),
 ]
