@@ -12,6 +12,7 @@ import {Modal} from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import SearchIcon from '@mui/icons-material/Search';
+import {toast} from "react-toastify";
 
 export default function MainPage() {
     const [categories, setCategories] = useState([]);
@@ -82,21 +83,15 @@ export default function MainPage() {
 
     const handleAddToOrder = async () => {
         if (!user.id) {
-            window.location.href = 'http://localhost:8000/auth/login';
+            toast.error("Для замовлення потрібно увійти в аккаунт")
             return
         }
 
         try {
-            const response = await axiosInstance.get('/api/order', {
-                params: {
-                    user: user.id,
-                    order_status: 'ready'
-                }
-            });
+            const response = await axiosInstance.get(`/api/order/${user.id}/ready`);
             let order;
-            const lastIndex = response.data.length - 1;
 
-            if (response.data.length === 0 || response.data[lastIndex].order_status !== 'ready') {
+            if (response.data.length === 0) {
                 const cust = await axiosInstance.get(`/api/customer/${user.id}`);
                 const orderData = {
                     user: cust.data.id,
@@ -142,6 +137,8 @@ export default function MainPage() {
                     count: existingDishToOrder.count + count,
                 });
             }
+            toast.success("Товар додан до корзини")
+            setCount(1);
             toggleModal();
         } catch (error) {
             console.error('Error adding to order:', error);
@@ -196,7 +193,6 @@ export default function MainPage() {
                     <NavLink to="/feedback/list" className={`${styles["button-banner"]}`}>
                         Відгуки
                     </NavLink>
-                    <a href="#" className={styles["button-banner"]}>Історія</a>
                     <NavLink to="/info" className={`${styles["button-banner"]}`}>
                         Інфо
                     </NavLink>

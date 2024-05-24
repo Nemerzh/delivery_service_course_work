@@ -128,3 +128,9 @@ class CourierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Courier
         fields = '__all__'
+
+
+class UserRoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['role_id']

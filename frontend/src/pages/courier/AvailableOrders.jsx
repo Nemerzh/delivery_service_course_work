@@ -59,24 +59,26 @@ export default function AvailableOrders() {
     };
 
     return (
-        <div className={styles["courier-page"]}>
-            <div className={styles["courier-container"]}>
-                <h1>Ваші доставки</h1>
-                <hr/>
-                {deliveries.map(delivery => (
-                    <div key={delivery.id} className={styles["order-cell"]}>
-                        <div className={styles["text-cell"]}>
-                            Номер доставки: {delivery.id} <br/>
-                            Телефон: {delivery.user_phone_number} <br/>
-                            Адреса: {delivery.delivery_address} <br/>
+        <div className={styles['body-courier']}>
+            <div className={styles["courier-page"]}>
+                <div className={styles["courier-container"]}>
+                    <h1>Ваші доставки</h1>
+                    <hr/>
+                    {deliveries.map(delivery => (
+                        <div key={delivery.id} className={styles["order-cell"]}>
+                            <div className={styles["text-cell"]}>
+                                Номер доставки: {delivery.id} <br/>
+                                Телефон: {delivery.user_phone_number} <br/>
+                                Адреса: {delivery.delivery_address} <br/>
+                            </div>
+                            <div className={styles["button-container"]}>
+                                <button className={styles.button}
+                                        onClick={() => handleCompleteDelivery(delivery.id)}>Завершити
+                                </button>
+                            </div>
                         </div>
-                        <div className={styles["button-container"]}>
-                            <button className={styles.button}
-                                    onClick={() => handleCompleteDelivery(delivery.id)}>Завершити
-                            </button>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );

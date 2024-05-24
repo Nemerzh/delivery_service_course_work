@@ -26,14 +26,9 @@ export default function Login() {
 
     async function checkIfCourier(userId) {
         try {
-            const responseCouriers = await axiosInstance.get('/api/courier');
-            const couriers = responseCouriers.data;
-
-            const responseUser = await axiosInstance.get('/api/getuser');
-            const user = responseUser.data.filter(user => user.email === email);
-
-            if (couriers.some(courier => courier.user === user[0].id)) {
-                navigate('/availableorders');
+            const responseUser = await axiosInstance.get(`/api/find-user-role/${email}`);
+            if (responseUser.data.role_id === 5) {
+                await navigate('/availableorders');
             } else {
                 navigate('/');
             }
