@@ -1,14 +1,13 @@
 .courier-container {
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     align-items: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
     padding: 10px;
+    min-height: 100vh;
     height: 100%;
     background-color: whitesmoke;
     border-radius: 16px;
-    min-height: 96vh;
     box-shadow: 2px 0 3px rgba(0, 0, 0, 0.2), -2px 0 3px rgba(0, 0, 0, 0.2);
 }
 
@@ -104,4 +103,67 @@ h1 {
 
 .button:hover {
     background-color: #0056b3;
+}
+/* Для экранов шириной до 767px (мобильные устройства) */
+@media screen and (max-width: 767px) {
+    .courier-page {
+        width: 90%;
+    }
+
+    hr {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .main-text {
+        font-size: 14px;
+    }
+
+    .order-cell {
+        width: 90%;
+        font-size: 18px;
+    }
+
+    .text-cell {
+        font-size: 16px;
+    }
+
+    .button {
+        font-size: 16px;
+    }
+}
+
+/* Для экранов шириной от 768px до 1024px (планшеты) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .courier-page {
+        width: 80%;
+    }
+
+    hr {
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .main-text {
+        font-size: 15px;
+    }
+
+    .order-cell {
+        width: 80%;
+        font-size: 20px;
+    }
+
+    .text-cell {
+        font-size: 17px;
+    }
+
+    .button {
+        font-size: 17px;
+    }
 }

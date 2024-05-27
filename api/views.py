@@ -177,16 +177,11 @@ class LastFiveFeedbacksView(generics.ListAPIView):
     serializer_class = FeedbackSerializer
 
     def get_queryset(self):
-        # Получаем параметр max_id из запроса
         max_id = self.request.query_params.get('max_id')
-
         if max_id is not None:
-            # Фильтруем комментарии, id которых меньше max_id
             queryset = Feedback.objects.filter(id__lt=max_id).order_by('-id')[:1]
         else:
-            # Загружаем последние комментарии по id, если max_id не указан
             queryset = Feedback.objects.order_by('-id')[:1]
-
         return queryset
 
 

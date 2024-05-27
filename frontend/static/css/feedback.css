@@ -139,3 +139,78 @@ input[type="radio"] {
     background-color: #000;
     color: #FFFFFF;
 }
+
+
+/* Для экранов шириной до 767px (мобильные устройства) */
+@media screen and (max-width: 767px) {
+    .feedback-page {
+        width: 90%;
+    }
+
+    .add-comment-cell {
+        width: 80%;
+        font-size: 18px;
+    }
+
+    .comment-cell {
+        width: 80%;
+    }
+
+    hr, .comment-cell hr {
+        width: 90%;
+    }
+
+    .load-more-button {
+        width: 60%;
+        font-size: 14px;
+    }
+
+    .button-container {
+        gap: 10px;
+    }
+
+    .submit-button {
+        width: 100%;
+    }
+
+    .star {
+        font-size: 3rem;
+    }
+}
+
+/* Для экранов шириной от 768px до 1024px (планшеты) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .feedback-page {
+        width: 80%;
+    }
+
+    .add-comment-cell {
+        width: 80%;
+        font-size: 20px;
+    }
+
+    .comment-cell {
+        width: 80%;
+    }
+
+    hr, .comment-cell hr {
+        width: 80%;
+    }
+
+    .load-more-button {
+        width: 30%;
+        font-size: 16px;
+    }
+
+    .button-container {
+        gap: 50px;
+    }
+
+    .submit-button {
+        width: 50%;
+    }
+
+    .star {
+        font-size: 3.5rem;
+    }
+}

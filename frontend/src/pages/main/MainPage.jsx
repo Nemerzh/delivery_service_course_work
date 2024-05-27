@@ -205,9 +205,28 @@ export default function MainPage() {
                     className="swiper-container"
                     modules={[Navigation, A11y]}
                     spaceBetween={1}
-                    slidesPerView={10}
                     centeredSlides={false}
                     navigation
+                    breakpoints={{
+                        300: {
+                            slidesPerView: 3,
+                        },
+                        400: {
+                            slidesPerView: 4,
+                        },
+                        500: {
+                            slidesPerView: 5,
+                        },
+                        600: {
+                            slidesPerView: 6,
+                        },
+                        768: {
+                            slidesPerView: 7,
+                        },
+                        1024: {
+                            slidesPerView: 10,
+                        },
+                    }}
                 >
                     {categories.map(category => (
                         <SwiperSlide

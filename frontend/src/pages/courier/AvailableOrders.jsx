@@ -29,10 +29,6 @@ export default function AvailableOrders() {
     const fetchDeliveries = async (courierId) => {
         try {
             const response = await axiosInstance.get(`/api/delivery/${courierId}/in_delivery/`);
-            // const filteredDeliveries = response.data.filter(delivery =>
-            //     delivery.courier === courierId && delivery.delivery_status === 'in_delivery'
-            // );
-
             setDeliveries(response.data);
         } catch (error) {
             console.error('Error fetching deliveries:', error);

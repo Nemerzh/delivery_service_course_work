@@ -28,7 +28,7 @@ export default function Login() {
         try {
             const responseUser = await axiosInstance.get(`/api/find-user-role/${email}`);
             if (responseUser.data.role_id === 5) {
-                await navigate('/availableorders');
+                window.location.href = '/availableorders';
             } else {
                 navigate('/');
             }
