@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import * as styles from './orderdetail.module.css';
 import {axiosInstance} from "../../api/apiConfig";
 
@@ -8,6 +8,7 @@ export default function OrderDetail() {
     const {orderId} = useParams();
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate()
 
     useEffect(() => {
         axiosInstance.get(`api/order/detail/${orderId}`)
@@ -38,6 +39,10 @@ export default function OrderDetail() {
                 <p>Сума: {order.price} грн</p>
                 <p>Коментар: {order.comment}</p>
             </div>
+            <button onClick={() => {
+                navigate('/order_history')
+            }}>Повернутися
+            </button>
         </div>
     );
 };

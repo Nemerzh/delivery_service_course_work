@@ -1,6 +1,6 @@
 import React from 'react';
 import {Routes, Navigate, Route, useLocation} from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthMiddleware from './middlewares/AuthMiddleware';
 import Login from './pages/auth/Login';
@@ -56,8 +56,8 @@ function App() {
                         <Route path='login' element={!isLoggedIn ? (<Login/>) : (<Navigate replace to={"/"}/>)}></Route>
                         <Route path='register'
                                element={!isLoggedIn ? (<Register/>) : (<Navigate replace to={"/"}/>)}></Route>
-                        <Route path='user' element={isLoggedIn ? (<AuthMiddleware/>) : (<Navigate to={"../login"}/>)}>
-                            <Route index element={isLoggedIn ? (<User/>) : (<Navigate to={"../login"}/>)}></Route>
+                        <Route path='user' element={<AuthMiddleware/>}>
+                            <Route index element={<User/>}></Route>
                         </Route>
                     </Route>
 

@@ -6,12 +6,13 @@ import axios from 'axios';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import {NavLink, Navigate} from "react-router-dom";
+import {NavLink, Navigate, useNavigate} from "react-router-dom";
 import {axiosInstance} from "../../api/apiConfig";
 import {Modal} from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import SearchIcon from '@mui/icons-material/Search';
+import {toast} from "react-toastify";
 
 export default function MainPage() {
     const [categories, setCategories] = useState([]);
@@ -26,6 +27,7 @@ export default function MainPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredDishes, setFilteredDishes] = useState([]);
     const [showSearch, setShowSearch] = useState(false);
+    const navigate = useNavigate();
 
 
     const toggleSearch = () => {
@@ -82,17 +84,12 @@ export default function MainPage() {
 
     const handleAddToOrder = async () => {
         if (!user.id) {
-            window.location.href = 'http://localhost:8000/auth/login';
+            toast.error("Для замовлення потрібно увійти в аккаунт")
             return
         }
 
         try {
-            const response = await axiosInstance.get('/api/order', {
-                params: {
-                    user: user.id,
-                    order_status: 'ready'
-                }
-            });
+            const response = await axiosInstance.get(`/api/order/${user.id}/ready`);
             let order;
             const lastIndex = response.data.length - 1;
 
@@ -106,7 +103,7 @@ export default function MainPage() {
                     price: 0,
                     comment: '-',
                 };
-                const newOrderResponse = await axiosInstance.post('/api/order', orderData);
+                const newOrderResponse = await axiosInstance.post(`/api/order`, orderData);
                 order = newOrderResponse.data;
 
             } else {
@@ -142,6 +139,7 @@ export default function MainPage() {
                     count: existingDishToOrder.count + count,
                 });
             }
+            setCount(1);
             toggleModal();
         } catch (error) {
             console.error('Error adding to order:', error);

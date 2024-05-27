@@ -12,6 +12,18 @@
     justify-content: center;
 }
 
+@media screen and (max-width: 1024px) {
+    .detail-container {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .detail-container {
+        width: 98%;
+    }
+}
+
 .text-container {
     width: 188px;
 }

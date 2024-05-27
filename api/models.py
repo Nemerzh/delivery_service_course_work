@@ -42,7 +42,7 @@ class UserManager(BaseUserManager):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, unique=True)
-    url_image = models.CharField(max_length=255, blank=False, null=False, default="url")
+    url_image = models.URLField(max_length=255, blank=False, null=False, default="url")
 
     def __str__(self):
         return self.category_name

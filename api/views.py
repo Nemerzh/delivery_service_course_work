@@ -1,5 +1,10 @@
+import uuid
+from email.message import EmailMessage
+
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from paypalrestsdk import Payment, configure
 import json
 from django.shortcuts import get_object_or_404
@@ -29,6 +34,10 @@ from rest_framework.views import APIView
 from api.models import Category, User, Feedback, Customer, DishToOrder, Order, Dish
 from rest_framework.generics import RetrieveUpdateAPIView
 
+import random
+import string
+from django.utils.translation import gettext as _
+
 
 def get_user_tokens(user):
     refresh = tokens.RefreshToken.for_user(user)
@@ -45,12 +54,9 @@ def login_view(request):
     serializer.is_valid(raise_exception=True)
 
     email = serializer.validated_data["email"]
-    print(email)
     password = serializer.validated_data["password"]
-    print(password)
 
     user = authenticate(email=email, password=password)
-    print(user)
 
     if user is not None:
         tokens = get_user_tokens(user)
@@ -351,7 +357,6 @@ def update_order_status(request):
         return Response({'error': 'Order is not in ready status'}, status=400)
 
 
-
 class CategoryDishAPIView(APIView):
     def get(self, request, category_id):
         try:
@@ -390,8 +395,24 @@ class OrderAPIView(APIView):
             queryset = Order.objects.filter(user=customer).exclude(order_status='ready')
             serializer = OrderSerializer(queryset, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except Dish.DoesNotExist:
+        except Order.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class OrderMainAPIView(APIView):
+    def get(self, request, user_id, order_status):
+        try:
+            customer = Customer.objects.filter(user_id=user_id).first()
+            queryset = Order.objects.filter(user=customer, order_status=order_status)
+            serializer = OrderSerializer(queryset, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Order.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class OrderMainCreateAPIView(generics.CreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
 
 class OrderDetailAPIView(generics.RetrieveAPIView):
@@ -442,3 +463,96 @@ class CourierAPIView(generics.ListCreateAPIView):
 class UserAPIView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class SendEmailView(APIView):
+    def post(self, request):
+        user_email = request.data.get('email', None)
+
+        if user_email:
+            try:
+                # Отримуємо користувача за електронним листом
+                user = User.objects.get(email=user_email)
+
+                # Генеруємо новий рандомний пароль
+                new_password = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+
+                # Змінюємо пароль користувача на новий
+                user.set_password(new_password)
+                user.save()
+
+                # Надсилаємо новий пароль на електронну пошту користувача
+                send_welcome_email(user_email, new_password)
+
+                return Response({"message": "Email sent successfully"}, status=status.HTTP_200_OK)
+            except User.DoesNotExist:
+                return Response({"error": "User with this email does not exist"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"error": "Email is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+def send_welcome_email(user_email, new_password):
+    subject = 'Новий пароль'
+    message = f'Ваш новий пароль: {new_password} \nРекомендуємо змінити ваш пароль в профілі користувача'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [user_email]
+    send_mail(subject, message, email_from, recipient_list)
+
+
+class SendBillView(APIView):
+    serializer_class = DishToOrderSerializer
+
+    def post(self, request):
+        order_id = request.data.get('order_id')
+
+        if not order_id:
+            return Response({"error": "order_id is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        dishes = DishToOrder.objects.filter(order_id=order_id)
+
+        if not dishes.exists():
+            return Response({"error": "No dishes found for the given order_id."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = self.serializer_class(dishes, many=True)
+
+        items_list = []
+        order_price = 0
+
+        for item in serializer.data:
+            product_name = item['dish']['product_name']
+            price = item['dish']['price']
+            discount = item['dish']['discount']
+            category_name = item['dish']['category']['category_name']
+            count = item['count']
+            user_id = item['order']['user']
+            order_price = item['order']['price']
+            items_list.append({
+                "product_name": product_name,
+                "category_name": category_name,
+                "count": count,
+                "price": price,
+                "user_id": user_id,
+                "total_price": price * count * (1 - discount)
+            })
+
+        customer = Customer.objects.filter(id=items_list[0]['user_id'])
+
+        receipt_data = {
+            'order_id': order_id,
+            'order_price': order_price,
+            'dishes': items_list
+        }
+        receipt_html = render_to_string('receipt.html', receipt_data)
+
+        # Send email with receipt as attachment
+        subject = _('Receipt for Order #{}'.format(order_id))
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=_('Please find the receipt attached.'),
+            from_email=settings.EMAIL_HOST_USER,
+            to=[customer.get()]  # Assuming the user is authenticated and has an email attribute
+        )
+        email.attach_alternative(receipt_html, "text/html")
+        email.send()
+
+        return Response(serializer.data, status=status.HTTP_200_OK)

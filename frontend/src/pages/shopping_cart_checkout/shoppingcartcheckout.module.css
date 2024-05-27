@@ -8,6 +8,21 @@
     margin: 25px auto 50px;
 }
 
+@media screen and (max-width: 828px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .shadow-container {
+        width: 100% !important;
+    }
+
+    .left-container {
+        margin-right: 0 !important;
+        margin-bottom: 25px;
+    }
+}
+
 .left-container {
     margin-right: 16px;
 }
