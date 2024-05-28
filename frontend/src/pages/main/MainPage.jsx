@@ -27,7 +27,6 @@ export default function MainPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredDishes, setFilteredDishes] = useState([]);
     const [showSearch, setShowSearch] = useState(false);
-    const navigate = useNavigate();
 
 
     const toggleSearch = () => {
@@ -191,12 +190,8 @@ export default function MainPage() {
                 </div>
                 <div className={styles["banner-body"]}>
                     <a className={`${styles["button-banner"]} ${styles["active"]}`}>Меню</a>
-                    <NavLink to="/feedback/list" className={`${styles["button-banner"]}`}>
-                        Відгуки
-                    </NavLink>
-                    <NavLink to="/info" className={`${styles["button-banner"]}`}>
-                        Інфо
-                    </NavLink>
+                    <a href={"/feedback/list"} className={`${styles["button-banner"]}`}>Відгуки</a>
+                    <a href={"/info"} className={`${styles["button-banner"]}`}>Інфо</a>
                     <button onClick={toggleSearch} className={styles["button-banner"]}>Пошук</button>
                 </div>
             </div>
@@ -225,7 +220,7 @@ export default function MainPage() {
                             slidesPerView: 7,
                         },
                         1024: {
-                            slidesPerView: 10,
+                            slidesPerView: 9,
                         },
                     }}
                 >

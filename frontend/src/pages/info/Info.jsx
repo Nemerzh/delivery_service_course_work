@@ -12,12 +12,8 @@ export default function ContactPage() {
                     <img className={bannerStyles["head-logo"]} src="../../../static/images/3.png" alt="Fooddelivery"/>
                 </div>
                 <div className={bannerStyles["banner-body"]}>
-                    <NavLink to="/main" className={bannerStyles["button-banner"]}>
-                        Меню
-                    </NavLink>
-                    <NavLink to="/feedback/list" className={`${bannerStyles["button-banner"]}`}>
-                        Відгуки
-                    </NavLink>
+                    <a href={"/main"} className={`${bannerStyles["button-banner"]}`}>Меню</a>
+                    <a href={"/feedback/list"} className={`${bannerStyles["button-banner"]} ${styles["active"]}`}>Відгуки</a>
                     <a href="#" className={`${bannerStyles["button-banner"]} ${bannerStyles["active"]}`}>Інфо</a>
                 </div>
             </div>

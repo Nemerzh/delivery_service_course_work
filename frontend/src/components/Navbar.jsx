@@ -97,17 +97,17 @@ export default function Navbar(props) {
                     <div className="" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a href="" className="nav-link active a-scale">
+                                <a href="https://t.me/fooodDelivery_bot" className="nav-link active link-scale">
                                     <SupportAgentOutlinedIcon fontSize="large"/>
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a href="/shoppingcart" className="nav-link active a-scale">
+                                <a href="/shoppingcart" className="nav-link active link-scale">
                                     <ShoppingCartIcon fontSize="large"/>
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <div className="nav-link active a-scale">
+                                <div className="nav-link active link-scale">
                                     {!isLoggedIn ? (
                                         <NoAccountsIcon fontSize="large" onClick={handleClick}/>
                                     ) : (
