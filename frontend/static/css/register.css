@@ -77,3 +77,21 @@ form {
 .sign-up-param-container {
   display: flex;
 }
+
+@media screen and (max-width: 550px) {
+   .sign-up-container {
+    width: 400px;
+  }
+
+}
+
+@media screen and (max-width: 430px) {
+   .sign-up-container {
+    width: 300px;
+  }
+
+  .sign-up-btn {
+    width: 150px !important;
+  }
+
+}

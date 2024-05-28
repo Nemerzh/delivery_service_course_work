@@ -74,9 +74,10 @@ function FeedbackPage() {
                 <h1>Відгуки</h1>
                 <hr/>
 
-                <NavLink to={linkTo} className="add-comment-cell">
-                    Додати відгук
-                </NavLink>
+                <a href={isLoggedIn ? "/feedback/add" : "/auth/login"} className="add-comment-cell">Додати відгук</a>
+                {/*<NavLink to={linkTo} className="add-comment-cell">*/}
+                {/*    Додати відгук*/}
+                {/*</NavLink>*/}
 
                 {comments.map(comment => (
                     <div key={comment.id} className="comment-cell">

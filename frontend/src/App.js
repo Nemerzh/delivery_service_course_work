@@ -46,12 +46,12 @@ function App() {
                 <Route path='/' element={<PersistLogin/>}>
                     <Route index exact element={<Home/>}></Route>
                     <Route path="shoppingcart" element={<ShoppingCart/>}></Route>
-                    <Route path="checkout" element={<ShoppingCartCheckOut/>}></Route>
-                    <Route path="payment/:orderId/:totalPrice" element={<PaymentForm />}></Route>
-                    <Route path="/payment/success/:orderId" element={<PaymentSuccess />} />
-                    <Route path="/payment/cancel" element={<PaymentCancel />} />
-                    <Route path="order_history" element={<OrderHistory />} />
-                    <Route path="/order_history/detail/:orderId" element={<OrderDetail />} />
+                    <Route path="checkout" element={isLoggedIn ? (<ShoppingCartCheckOut/>) : (<Navigate replace to={"/"}/>)}></Route>
+                    <Route path="payment/:orderId/:totalPrice" element={isLoggedIn ? (<PaymentForm/>) : (<Navigate replace to={"/"}/>)}></Route>
+                    <Route path="/payment/success/:orderId" element={isLoggedIn ? (<PaymentSuccess/>) : (<Navigate replace to={"/"}/>)}/>
+                    <Route path="/payment/cancel" element={isLoggedIn ? (<PaymentCancel/>) : (<Navigate replace to={"/"}/>)}/>
+                    <Route path="order_history" element={isLoggedIn ? (<OrderHistory/>) : (<Navigate replace to={"/"}/>)}/>
+                    <Route path="/order_history/detail/:orderId" element={isLoggedIn ? (<OrderDetail/>) : (<Navigate replace to={"/"}/>)}/>
                     <Route path='/auth'>
                         <Route path='login' element={!isLoggedIn ? (<Login/>) : (<Navigate replace to={"/"}/>)}></Route>
                         <Route path='register'

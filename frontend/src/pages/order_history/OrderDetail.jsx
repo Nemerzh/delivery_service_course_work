@@ -40,7 +40,7 @@ export default function OrderDetail() {
                 <p>Коментар: {order.comment}</p>
             </div>
             <button onClick={() => {
-                navigate('/order_history')
+                window.location.href = '/order_history';
             }}>Повернутися
             </button>
         </div>

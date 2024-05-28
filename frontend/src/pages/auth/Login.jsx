@@ -31,11 +31,11 @@ export default function Login() {
             if (responseUser.data.role_id === 5) {
                 window.location.href = '/availableorders';
             } else {
-                navigate('/');
+                window.location.href = '/';
             }
         } catch (error) {
             console.error('Error fetching couriers:', error);
-            navigate('/');
+            window.location.href = '/';
         }
     }
 
@@ -79,9 +79,9 @@ export default function Login() {
 
     return (
         <div className='login-page-container'>
-            <Link to="/">
-                <img src="/../static/images/5.png" className="logotype" alt="logotype" />
-            </Link>
+            <a href="/">
+                <img src="/../static/images/5.png" className="logotype" alt="logotype"/>
+            </a>
             <div className="login-container">
                 <h3 className="login-form-label">Login</h3>
                 <form onSubmit={onSubmitForm} autoComplete="off" required>
