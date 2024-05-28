@@ -18,7 +18,6 @@ export default function ContactPage() {
                     <NavLink to="/feedback/list" className={`${bannerStyles["button-banner"]}`}>
                         Відгуки
                     </NavLink>
-                    <a href="#" className={bannerStyles["button-banner"]}>Історія</a>
                     <NavLink to="/info" className={`${bannerStyles["button-banner"]}`}>
                         Інфо
                     </NavLink>

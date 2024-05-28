@@ -45,7 +45,7 @@ export default function Footer(props) {
                                     className="top-footer-label">Контакти</p></Link>
                             </li>
                             <li className="nav-item me-3 me-lg-0">
-                                <Link to="https://www.facebook.com/?locale=uk_UA" className="nav-link"><p
+                                <Link to="https://t.me/fooodDelivery_bot" className="nav-link"><p
                                     className="top-footer-label">Підтримка</p></Link>
                             </li>
                             <li className="nav-item me-3 me-lg-0">

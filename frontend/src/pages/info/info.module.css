@@ -48,3 +48,42 @@ h2 {
     color: #555;
 }
 
+@media screen and (max-width: 767px) {
+    hr {
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin: 10px;
+    }
+
+    .main-text {
+        font-size: 14px;
+    }
+
+    .nav-link {
+        font-size: 20px;
+        padding-left: 15px;
+    }
+}
+
+/* Для экранов шириной от 768px до 1024px (планшеты) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    hr {
+        width: 80%;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .main-text {
+        font-size: 15px;
+    }
+
+    .nav-link {
+        font-size: 22px;
+        padding-left: 20px;
+    }
+}

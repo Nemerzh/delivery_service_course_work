@@ -58,7 +58,6 @@ function FeedbackAdd() {
                     <NavLink to="/feedback/list" className={`${styles["button-banner"]} ${styles["active"]}`}>
                         Відгуки
                     </NavLink>
-                    <a href="#" className={styles["button-banner"]}>Історія</a>
                     <NavLink to="/info" className={`${styles["button-banner"]}`}>
                         Інфо
                     </NavLink>
