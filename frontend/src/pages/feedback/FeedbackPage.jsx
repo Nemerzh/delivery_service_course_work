@@ -4,6 +4,7 @@ import axios from 'axios';
 import useAuth from "../../hooks/useAuth";
 import '../../../static/css/feedback.css';
 import * as styles from "../main/main.module.css";
+import {toast} from "react-toastify";
 
 
 function FeedbackPage() {
@@ -12,7 +13,7 @@ function FeedbackPage() {
     const commentsPerPage = 5;
     const {isLoggedIn} = useAuth();
     const minId = comments.length > 0 ? comments[comments.length - 1].id : null;
-    const linkTo = isLoggedIn ? "/feedback/add" : "/auth/login";
+
 
     useEffect(() => {
         if (page > 1 && minId <= 1) {
@@ -51,7 +52,11 @@ function FeedbackPage() {
         }
     };
 
-
+    const handleAddCommentClick = () => {
+        if (!isLoggedIn) {
+            toast.error("Потрібно увійти в аккаунт");
+        }
+    };
     return (
         <div className="feedback-page">
 
@@ -60,13 +65,9 @@ function FeedbackPage() {
                     <img className={styles["head-logo"]} src="../../../static/images/3.png" alt="Fooddelivery"/>
                 </div>
                 <div className={styles["banner-body"]}>
-                    <NavLink to="/main" className={styles["button-banner"]}>
-                        Меню
-                    </NavLink>
+                    <a href={"/main"} className={`${styles["button-banner"]}`}>Меню</a>
                     <a className={`${styles["button-banner"]} ${styles["active"]}`}>Відгуки</a>
-                    <NavLink to="/info" className={`${styles["button-banner"]}`}>
-                        Інфо
-                    </NavLink>
+                    <a href={"/info"} className={`${styles["button-banner"]}`}>Інфо</a>
                 </div>
             </div>
 
@@ -74,9 +75,13 @@ function FeedbackPage() {
                 <h1>Відгуки</h1>
                 <hr/>
 
-                <NavLink to={linkTo} className="add-comment-cell">
-                    Додати відгук
-                </NavLink>
+                {isLoggedIn ? (
+                    <a href={"/feedback/add"} className="add-comment-cell">Додати відгук</a>
+                ) : (
+                    <span className="add-comment-cell" onClick={handleAddCommentClick}>
+                        Додати відгук
+                    </span>
+                )}
 
                 {comments.map(comment => (
                     <div key={comment.id} className="comment-cell">
