@@ -39,7 +39,7 @@ export default function Register() {
 
             setLoading(false)
 
-            navigate('/auth/login')
+            window.location.href = '/auth/login';
         } catch (error) {
             setLoading(false)
 
@@ -48,9 +48,9 @@ export default function Register() {
 
     return (
         <div className='register-page-container'>
-            <Link to="/">
+            <a href="/">
                 <img src="/../static/images/5.png" className="logotype" alt="logotype"/>
-            </Link>
+            </a>
             <div className="sign-up-container">
                 <h3 className="sign-up-form-label">Create your account</h3>
                 <form onSubmit={onSubmitForm}>

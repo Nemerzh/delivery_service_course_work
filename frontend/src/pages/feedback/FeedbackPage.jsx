@@ -74,7 +74,6 @@ function FeedbackPage() {
             <div className="feedback-container">
                 <h1>Відгуки</h1>
                 <hr/>
-
                 {isLoggedIn ? (
                     <a href={"/feedback/add"} className="add-comment-cell">Додати відгук</a>
                 ) : (

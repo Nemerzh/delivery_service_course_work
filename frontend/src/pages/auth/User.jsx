@@ -98,7 +98,7 @@ export default function User() {
         setLoading(true)
 
         await logout()
-        navigate('/')
+        window.location.href = '/';
     }
 
     return (

@@ -79,12 +79,12 @@ export default function User() {
     }
 
     async function toMenu() {
-        navigate('/')
+        window.location.href = '/main';
     }
 
     async function toCheckOut() {
         if (dishes.length !== 0) {
-            navigate('/checkout')
+            window.location.href = '/checkout';
         } else {
             toast.error("Ваш кошик пустий");
         }

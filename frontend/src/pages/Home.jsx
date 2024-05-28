@@ -29,25 +29,25 @@ export default function Home() {
         fetchCategory();
     }, []); // Передача порожнього масиву як другого аргументу useEffect
 
-    function calculateSlidesPerView() {
-        if (window.innerWidth < 550) {
-            return 1;
-        } else if (window.innerWidth < 1024) {
-            return 2;
-        } else if (window.innerWidth < 1300) {
-            return 3;
-        } else return 4;
-    }
-
-    window.addEventListener('load', () => {
-        let newSize = calculateSlidesPerView();
-        setSize(newSize);
-    });
-
-    window.addEventListener('resize', () => {
-        let newSize = calculateSlidesPerView();
-        setSize(newSize);
-    });
+    // function calculateSlidesPerView() {
+    //     if (window.innerWidth < 550) {
+    //         return 1;
+    //     } else if (window.innerWidth < 1024) {
+    //         return 2;
+    //     } else if (window.innerWidth < 1300) {
+    //         return 3;
+    //     } else return 4;
+    // }
+    //
+    // window.addEventListener('load', () => {
+    //     let newSize = calculateSlidesPerView();
+    //     setSize(newSize);
+    // });
+    //
+    // window.addEventListener('resize', () => {
+    //     let newSize = calculateSlidesPerView();
+    //     setSize(newSize);
+    // });
 
 
     return (
@@ -69,8 +69,25 @@ export default function Home() {
                     className="swiper-container"
                     modules={[Navigation, A11y]}
                     spaceBetween={11}
-                    slidesPerView={size}
+                    // slidesPerView={size}
                     navigation
+                    breakpoints={{
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        550: {
+                            slidesPerView: 1,
+                        },
+                        1024: {
+                            slidesPerView: 2,
+                        },
+                        1300: {
+                            slidesPerView: 3,
+                        },
+                        1301: {
+                            slidesPerView: 4,
+                        }
+                    }}
                 >
                     {categories.map(category => (
                         <SwiperSlide
@@ -96,7 +113,7 @@ export default function Home() {
                 <b>FoodDelivery - мережа ресторанів здорового харчування. Думаєте, це неможливо? Просто замовте страви з
                     меню FoodDelivery. </b><br/><br/>У нас діє зручна доставка їжі у Києві. Скуштуйте і переконайтеся,
                 наскільки смачною, поживною і здоровою може бути їжа з ресторану швидкого харчування. <br/>
-                Міжнародна мережа Salateira — це заклади здорового харчування. Ми об'єднали бездоганну якість страв,
+                Міжнародна мережа FoodDelivery — це заклади здорового харчування. Ми об'єднали бездоганну якість страв,
                 швидке обслуговування і великий вибір інгредієнтів. Приправили це бездоганною якістю і прекрасним
                 смаком. Міжнародна мережа FoodDelivery — це заклади здорового харчування. Ми об'єднали бездоганну якість
                 страв, швидке обслуговування і великий вибір інгредієнтів. Приправили це бездоганною якістю і прекрасним

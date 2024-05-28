@@ -104,7 +104,7 @@ export default function ShoppingCartCheckOut() {
     }, [user.id]);
 
     async function toMenu() {
-        navigate('/shoppingcart');
+        window.location.href = '/shoppingcart';
     }
 
     function calculateTotalPrice(dishes) {
@@ -155,11 +155,9 @@ export default function ShoppingCartCheckOut() {
                 totalPrice
             });
 
-            // Handle successful response here if needed
-            navigate(`/payment/${dishes[0].order.id}/${totalPrice}`);
+            window.location.href = `/payment/${dishes[0].order.id}/${totalPrice}`;
         } catch (error) {
             console.error('Error submitting the form:', error);
-            // Handle error here if needed
         } finally {
             setLoading(false);
         }

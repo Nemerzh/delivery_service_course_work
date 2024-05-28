@@ -6,7 +6,7 @@ export default function PaymentCancel() {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
-        navigate('/');
+        window.location.href = '/';
     };
 
     return (
