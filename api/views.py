@@ -10,7 +10,7 @@ import json
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, permissions
 from api.serializers import CategoriesSerializer, UserSerializer, FeedbackSerializer, DeliverySerializer, \
-    CourierSerializer
+    CourierSerializer, UserRoleSerializer
 
 from api.models import Category, User, Feedback, Delivery, Courier
 
@@ -183,16 +183,11 @@ class LastFiveFeedbacksView(generics.ListAPIView):
     serializer_class = FeedbackSerializer
 
     def get_queryset(self):
-        # Получаем параметр max_id из запроса
         max_id = self.request.query_params.get('max_id')
-
         if max_id is not None:
-            # Фильтруем комментарии, id которых меньше max_id
             queryset = Feedback.objects.filter(id__lt=max_id).order_by('-id')[:1]
         else:
-            # Загружаем последние комментарии по id, если max_id не указан
             queryset = Feedback.objects.order_by('-id')[:1]
-
         return queryset
 
 
@@ -410,6 +405,7 @@ class OrderMainAPIView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
+
 class OrderMainCreateAPIView(generics.CreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
@@ -463,6 +459,7 @@ class CourierAPIView(generics.ListCreateAPIView):
 class UserAPIView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 
 class SendEmailView(APIView):
@@ -556,3 +553,16 @@ class SendBillView(APIView):
         email.send()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+      
+      
+class FindUserRoleAPIView(APIView):
+    def get(self, request, email):
+        try:
+            # Находим пользователя по email
+            user = User.objects.get(email=email)
+            # Сериализуем данные пользователя, включая только поле role_id
+            serializer = UserRoleSerializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({"detail": "User not found"}, status=status.HTTP_404_NOT_FOUND)

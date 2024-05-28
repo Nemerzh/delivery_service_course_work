@@ -14,6 +14,7 @@ import '../../static/css/header.css';
 import '../../static/css/menu.css';
 
 export default function Navbar(props) {
+    const navigate = useNavigate()
     const {visible} = props
     const {isLoggedIn} = useAuth();
     const logout = useLogout()
@@ -44,6 +45,7 @@ export default function Navbar(props) {
     async function onLogout() {
         await logout()
         toast.success("Ви вийшли з вашого аккаунту!");
+        navigate('/')
     }
 
     return (
@@ -64,7 +66,7 @@ export default function Navbar(props) {
                         </li>
                     )}
                     <li>
-                        <Link to="" onClick={closeMenu}>Меню</Link>
+                        <Link to="/main" onClick={closeMenu}>Меню</Link>
                     </li>
                     <li>
                         <Link to="/feedback/list" onClick={closeMenu}>Відгуки</Link>
@@ -76,10 +78,10 @@ export default function Navbar(props) {
                     )}
 
                     <li>
-                        <Link to="" onClick={closeMenu}>Підтримка</Link>
+                        <Link to="https://t.me/fooodDelivery_bot" onClick={closeMenu}>Підтримка</Link>
                     </li>
                     <li>
-                        <Link to="" onClick={closeMenu}>Новини</Link>
+                        <Link to="/news" onClick={closeMenu}>Новини</Link>
                     </li>
                 </ul>
             </menu>

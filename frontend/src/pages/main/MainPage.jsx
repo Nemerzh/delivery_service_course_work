@@ -91,9 +91,8 @@ export default function MainPage() {
         try {
             const response = await axiosInstance.get(`/api/order/${user.id}/ready`);
             let order;
-            const lastIndex = response.data.length - 1;
 
-            if (response.data.length === 0 || response.data[lastIndex].order_status !== 'ready') {
+            if (response.data.length === 0) {
                 const cust = await axiosInstance.get(`/api/customer/${user.id}`);
                 const orderData = {
                     user: cust.data.id,
@@ -139,6 +138,7 @@ export default function MainPage() {
                     count: existingDishToOrder.count + count,
                 });
             }
+            toast.success("Товар додано до корзини")
             setCount(1);
             toggleModal();
         } catch (error) {
@@ -194,7 +194,6 @@ export default function MainPage() {
                     <NavLink to="/feedback/list" className={`${styles["button-banner"]}`}>
                         Відгуки
                     </NavLink>
-                    <a href="#" className={styles["button-banner"]}>Історія</a>
                     <NavLink to="/info" className={`${styles["button-banner"]}`}>
                         Інфо
                     </NavLink>
@@ -207,9 +206,28 @@ export default function MainPage() {
                     className="swiper-container"
                     modules={[Navigation, A11y]}
                     spaceBetween={1}
-                    slidesPerView={10}
                     centeredSlides={false}
                     navigation
+                    breakpoints={{
+                        300: {
+                            slidesPerView: 3,
+                        },
+                        400: {
+                            slidesPerView: 4,
+                        },
+                        500: {
+                            slidesPerView: 5,
+                        },
+                        600: {
+                            slidesPerView: 6,
+                        },
+                        768: {
+                            slidesPerView: 7,
+                        },
+                        1024: {
+                            slidesPerView: 10,
+                        },
+                    }}
                 >
                     {categories.map(category => (
                         <SwiperSlide
