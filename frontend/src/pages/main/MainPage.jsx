@@ -6,7 +6,7 @@ import axios from 'axios';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import {NavLink, Navigate} from "react-router-dom";
+import {NavLink, Navigate, useNavigate} from "react-router-dom";
 import {axiosInstance} from "../../api/apiConfig";
 import {Modal} from "@mui/material";
 import useAuth from "../../hooks/useAuth";
@@ -27,6 +27,7 @@ export default function MainPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredDishes, setFilteredDishes] = useState([]);
     const [showSearch, setShowSearch] = useState(false);
+    const navigate = useNavigate();
 
 
     const toggleSearch = () => {
@@ -101,7 +102,7 @@ export default function MainPage() {
                     price: 0,
                     comment: '-',
                 };
-                const newOrderResponse = await axiosInstance.post('/api/order', orderData);
+                const newOrderResponse = await axiosInstance.post(`/api/order`, orderData);
                 order = newOrderResponse.data;
 
             } else {
@@ -137,7 +138,7 @@ export default function MainPage() {
                     count: existingDishToOrder.count + count,
                 });
             }
-            toast.success("Товар додан до корзини")
+            toast.success("Товар додано до корзини")
             setCount(1);
             toggleModal();
         } catch (error) {

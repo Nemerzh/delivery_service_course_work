@@ -8,7 +8,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../static/css/header.css';
 import '../../static/css/menu.css';
@@ -60,18 +60,23 @@ export default function Navbar(props) {
                     </Link>
                 </h2>
                 <ul>
-                    <li>
-                        <Link to="auth/user" onClick={closeMenu}>Профіль</Link>
-                    </li>
+                    {isLoggedIn && (
+                        <li>
+                            <Link to="auth/user" onClick={closeMenu}>Профіль</Link>
+                        </li>
+                    )}
                     <li>
                         <Link to="/main" onClick={closeMenu}>Меню</Link>
                     </li>
                     <li>
                         <Link to="/feedback/list" onClick={closeMenu}>Відгуки</Link>
                     </li>
-                    <li>
-                        <Link to="order_history" onClick={closeMenu}>Історія замовлень</Link>
-                    </li>
+                    {isLoggedIn && (
+                        <li>
+                            <Link to="order_history" onClick={closeMenu}>Історія замовлень</Link>
+                        </li>
+                    )}
+
                     <li>
                         <Link to="https://t.me/fooodDelivery_bot" onClick={closeMenu}>Підтримка</Link>
                     </li>
@@ -106,20 +111,29 @@ export default function Navbar(props) {
                                     {!isLoggedIn ? (
                                         <NoAccountsIcon fontSize="large" onClick={handleClick}/>
                                     ) : (
-                                        <AccountCircleIcon fontSize="large" onClick={handleClick} />
+                                        <AccountCircleIcon fontSize="large" onClick={handleClick}/>
                                     )}
                                     <Menu
                                         anchorEl={anchorEl}
                                         open={Boolean(anchorEl)}
                                         onClose={handleClose}
                                     >
-                                        <MenuItem onClick={handleClose}>
+                                        <MenuItem disabled={!isLoggedIn} onClick={handleClose}>
                                             <Link className="profile-drop-link" to="/auth/user">Мій аккаунт</Link>
                                         </MenuItem>
                                         <MenuItem disabled={isLoggedIn} onClick={handleClose}>
                                             <Link className="profile-drop-link" to="/auth/login">Увійти</Link>
                                         </MenuItem>
-                                        <MenuItem disabled={!isLoggedIn} onClick={() => { onLogout(); handleClose(); }}>
+                                        {!isLoggedIn && (
+                                            <MenuItem onClick={handleClose}>
+                                                <Link className="profile-drop-link"
+                                                      to="/auth/register">Реєстрація</Link>
+                                            </MenuItem>
+                                        )}
+                                        <MenuItem disabled={!isLoggedIn} onClick={() => {
+                                            onLogout();
+                                            handleClose();
+                                        }}>
                                             <Link className="profile-drop-link" to="/auth/user">Вийти</Link>
                                         </MenuItem>
                                     </Menu>
