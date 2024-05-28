@@ -160,12 +160,12 @@ section {
 
 .swiper-button {
     display: flex;
-    justify-content: center; /* Центрирует текст по горизонтали */
+    justify-content: center;
     align-items: center;
     align-content: center;
     border: 1px solid;
     border-radius: 32px;
-    width: 100px; /* Фиксированная ширина для всех кнопок */
+    width: 105px;
     background: #E0FFFF;
     font-size: 15px;
     font-weight: 400;
@@ -215,6 +215,8 @@ section {
     display: grid;
     position: relative;
     gap: 16px 0;
+    overflow-y: auto; /* Добавлено для вертикальной прокрутки */
+    flex-grow: 1; /* Добавлено для заполнения оставшегося пространства */
 }
 
 .product-name {
@@ -475,7 +477,7 @@ section {
     }
 
     .search-place {
-        font-size: 1rem; /* Размер шрифта по умолчанию */
+        font-size: 1rem;
         padding: 0 10px;
     }
 
@@ -532,7 +534,35 @@ section {
     }
 
     .popup {
-        width: 40%;
+        width: 50%;
+        height: 65vh;
+    }
+
+    .product-name {
+        font-size: 22px;
+    }
+
+    .product-describe {
+        font-size: 15px;
+        padding-right: 20px;
+    }
+
+    .product-bottom {
+        height: auto;
+        padding: 14px;
+        grid-template-columns: auto 120px 90px;
+    }
+
+    .product-counter {
+        grid-template-columns: 120px 150px;
+    }
+
+    .counter-minus, .counter-plus {
+        font-size: 22px;
+    }
+
+    .counter-number {
+        font-size: 18px;
     }
 }
 
@@ -604,6 +634,45 @@ section {
     }
 
     .popup {
-        width: 70%;
+        width: 85%;
+        height: 65%;
+    }
+
+    .product-name {
+        font-size: 20px;
+    }
+
+    .product-describe {
+        font-size: 14px;
+        padding-right: 16px;
+    }
+
+    .product-bottom {
+        height: auto;
+        padding: 12px;
+        grid-template-columns: auto 100px 100px;
+    }
+
+    .product-counter {
+        grid-template-columns: 100px 124px;
+    }
+
+    .counter-minus, .counter-plus {
+        top: 7px;
+        font-size: 20px;
+    }
+
+    .counter-number {
+        font-size: 16px;
+    }
+
+    .popup-body {
+        max-height: calc(60vh - 220px); /* Пример для меньших экранов */
+    }
+}
+
+@media screen and (max-height: 768px) {
+    .popup {
+        height: 80%;
     }
 }

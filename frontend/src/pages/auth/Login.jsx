@@ -31,11 +31,11 @@ export default function Login() {
             if (responseUser.data.role_id === 5) {
                 window.location.href = '/availableorders';
             } else {
-                navigate('/');
+                window.location.href = '/'
             }
         } catch (error) {
             console.error('Error fetching couriers:', error);
-            navigate('/');
+            window.location.href = '/'
         }
     }
 

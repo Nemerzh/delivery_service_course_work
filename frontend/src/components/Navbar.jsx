@@ -97,7 +97,7 @@ export default function Navbar(props) {
                     <div className="" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link to="" className="nav-link active link-scale">
+                                <Link to="https://t.me/fooodDelivery_bot" className="nav-link active link-scale">
                                     <SupportAgentOutlinedIcon fontSize="large"/>
                                 </Link>
                             </li>

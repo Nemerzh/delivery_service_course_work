@@ -52,15 +52,9 @@ function FeedbackAdd() {
                     <img className={styles["head-logo"]} src="../../../static/images/3.png" alt="Fooddelivery"/>
                 </div>
                 <div className={styles["banner-body"]}>
-                    <NavLink to="/main" className={styles["button-banner"]}>
-                        Меню
-                    </NavLink>
-                    <NavLink to="/feedback/list" className={`${styles["button-banner"]} ${styles["active"]}`}>
-                        Відгуки
-                    </NavLink>
-                    <NavLink to="/info" className={`${styles["button-banner"]}`}>
-                        Інфо
-                    </NavLink>
+                    <a href={"/main"} className={`${styles["button-banner"]}`}>Меню</a>
+                    <a href={"/feedback/list"} className={`${styles["button-banner"]} ${styles["active"]}`}>Відгуки</a>
+                    <a href={"/info"} className={`${styles["button-banner"]}`}>Інфо</a>
                 </div>
             </div>
 
@@ -111,9 +105,7 @@ function FeedbackAdd() {
                         <button type="submit" className="submit-button">
                             Готово
                         </button>
-                        <NavLink to="/feedback/list" className="submit-button">
-                            Назад
-                        </NavLink>
+                        <a href={"/feedback/list"} className="submit-button">Назад</a>
                     </div>
                 </form>
             </div>
