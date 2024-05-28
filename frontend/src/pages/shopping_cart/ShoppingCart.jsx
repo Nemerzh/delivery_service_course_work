@@ -11,7 +11,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import {red} from '@mui/material/colors';
-import axios from "axios";
 
 export default function User() {
 
@@ -35,7 +34,7 @@ export default function User() {
                     const response = await axiosInstance.get(`api/user-ready-dishes/${user.id}`);
                     setDishes(response.data);
                 } catch (error) {
-                    console.error('Помилка при отриманні адреси доставки:', error);
+                    console.error('Помилка при отриманні товарів у кошик', error);
                 }
             }
         }

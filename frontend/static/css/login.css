@@ -78,3 +78,13 @@ form {
   border-radius: 0 10px 10px 0; /* Add rounded corners */
   font-size: 14px; /* Adjust font size as needed */
 }
+
+.forgot {
+  margin-top: 10px;
+  transition: transform .4s;
+  cursor: pointer;
+}
+
+.forgot:hover {
+  transform: scale(1.02);
+}

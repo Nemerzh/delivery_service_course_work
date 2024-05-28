@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .delivery-row {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Receipt for Order #{{ order_id }}</h2>
+    <table>
+        <tr>
+            <th>Назва</th>
+            <th>Категорія</th>
+            <th>Кількість, шт</th>
+            <th>Ціна, грн</th>
+            <th>Загальна вартість, грн</th>
+        </tr>
+        {% for item in dishes %}
+        <tr>
+            <td>{{ item.product_name }}</td>
+            <td>{{ item.category_name }}</td>
+            <td>{{ item.count }} шт</td>
+            <td>{{ item.price }} грн</td>
+            <td>{{ item.total_price }} грн</td>
+        </tr>
+        {% endfor %}
+        <tr class="delivery-row">
+            <td>Доставка</td>
+            <td></td>
+            <td></td>
+            <td>60 грн</td>
+            <td>{{ order_price }} грн</td>
+        </tr>
+    </table>
+</body>
+</html>

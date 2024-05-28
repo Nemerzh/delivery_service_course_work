@@ -107,7 +107,7 @@ export default function User() {
             <div className={styles["profile-container"]}>
                 <img className={styles.img} src="../../../static/images/profile.png" alt=""/>
                 <form onSubmit={onSubmitForm} className={styles.form}>
-                    <div className={styles["test"]}>
+                    <div className={styles["input-fields"]}>
                         <label htmlFor="first-name">Ім'я</label>
                         <input type="text"
                                placeholder='First name'
@@ -117,7 +117,7 @@ export default function User() {
                                defaultValue={user.first_name}
                                onChange={handleFirstNameChange}/>
                     </div>
-                    <div className={styles["test"]}>
+                    <div className={styles["input-fields"]}>
                         <label htmlFor="last-name">Прізвище</label>
                         <input type="text"
                                placeholder='Last name'
@@ -127,7 +127,7 @@ export default function User() {
                                defaultValue={user.last_name}
                                onChange={handleLastNameChange}/>
                     </div>
-                    <div className={styles["test"]}>
+                    <div className={styles["input-fields"]}>
                         <label htmlFor="phone-number">Номер телефону</label>
                         <input type="tel"
                                placeholder="+380ххххххххх"
@@ -138,7 +138,7 @@ export default function User() {
                                defaultValue={user.phone_number}
                                onChange={handlePhoneNumberChange}/>
                     </div>
-                    <div className={styles["test"]}>
+                    <div className={styles["input-fields"]}>
                         <label htmlFor="delivery_adress">Адреса доставки</label>
                         <input type="text"
                                placeholder='Будь ласка, введіть адресу у форматі: вулиця, будинок'
@@ -148,7 +148,7 @@ export default function User() {
                                defaultValue={delivery_address}
                                onChange={handleDeliveryAddressChange}/>
                     </div>
-                    <div className={styles["test"]}>
+                    <div className={styles["input-fields"]}>
                         <label htmlFor="password">Новий пароль</label>
                         <input type="password"
                                placeholder='New password'

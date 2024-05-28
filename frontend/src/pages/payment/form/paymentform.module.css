@@ -12,6 +12,12 @@
     border: solid 1px #767676;
 }
 
+@media screen and (max-width: 650px) {
+    .payment-container {
+        width: 80%;
+    }
+}
+
 .payment-button {
     margin-top: 40px;
     padding: 10px 20px;
