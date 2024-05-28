@@ -36,6 +36,7 @@
 .banner-body {
     display: flex;
     gap: 8px;
+    flex-wrap: nowrap;
 }
 
 .head-logo {
@@ -159,11 +160,12 @@ section {
 
 .swiper-button {
     display: flex;
+    justify-content: center; /* Центрирует текст по горизонтали */
     align-items: center;
     align-content: center;
     border: 1px solid;
     border-radius: 32px;
-    width: max-content;
+    width: 100px; /* Фиксированная ширина для всех кнопок */
     background: #E0FFFF;
     font-size: 15px;
     font-weight: 400;
@@ -181,6 +183,7 @@ section {
     border-color: #E0FFFF;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 
 .popup {
     width: 30%;
@@ -459,4 +462,148 @@ section {
     border-color: transparent;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .body {
+        width: 90%;
+    }
+
+    .search-container {
+        width: 40%;
+    }
+
+    .search-place {
+        font-size: 1rem; /* Размер шрифта по умолчанию */
+        padding: 0 10px;
+    }
+
+    .search-button {
+        padding: 0 20px;
+    }
+
+    .swiper-button {
+        width: 90px;
+        font-size: 15px;
+    }
+
+    .banner {
+        height: 200px;
+        padding: 20px;
+    }
+
+    .banner-head {
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    .button-banner {
+        font-size: 18px;
+        height: 40px;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .container-goods {
+        padding: 20px;
+    }
+
+    .goods-header {
+        height: 180px;
+    }
+
+    .goods-body {
+        height: 120px;
+    }
+
+    .goods-name {
+        font-size: 28px;
+    }
+
+    .goods-price {
+        font-size: 24px;
+    }
+
+    .cell {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+        justify-content: center;
+        gap: 32px;
+    }
+
+    .popup {
+        width: 40%;
+    }
+}
+
+/* Для мобильных устройств (экраны шириной до 768px) */
+@media screen and (max-width: 768px) {
+    .body {
+        width: 90%;
+    }
+
+    .search-container {
+        width: 70%;
+    }
+
+    .search-place {
+        font-size: 0.875rem; /* Уменьшаем размер шрифта */
+        padding: 0 8px;
+    }
+
+    .search-button {
+        padding: 0 16px;
+    }
+
+    .swiper-button {
+        width: 80px;
+        font-size: 14px;
+    }
+
+    .banner {
+        height: 150px;
+        padding: 12px;
+    }
+
+    .banner-head {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .button-banner {
+        font-size: 14px;
+        height: 32px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .container-goods {
+        padding: 12px;
+    }
+
+    .goods-header {
+        height: 120px;
+    }
+
+    .goods-body {
+        height: 80px;
+    }
+
+    .goods-name {
+        font-size: 20px;
+    }
+
+    .goods-price {
+        font-size: 18px;
+    }
+
+    .cell {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 250px));
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .popup {
+        width: 70%;
+    }
 }

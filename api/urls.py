@@ -24,6 +24,8 @@ urlpatterns = [
     path('categorydish/<int:category_id>', CategoryDishAPIView.as_view(), name='category-dish'),
     path("dish_to_order", GetDishToOrderAPIView.as_view(), name='dish-to-order'),
     path('dish_to_order_id/<int:id>', UpdateCountDishToOrderAPIView.as_view(), name='dish_to_order_id'),
+    path("order/<int:user_id>/<str:order_status>", OrderMainAPIView.as_view(), name='main-order'),
+    path("order", OrderMainCreateAPIView.as_view(), name='main-create-order'),
     path("order/<int:user_id>", OrderAPIView.as_view(), name='order'),
     path('order/detail/<int:pk>', OrderDetailAPIView.as_view(), name='order-detail'),
     path("order/<int:user_id>/<str:order_status>", OrderMainAPIView.as_view(), name='main-order'),
@@ -34,4 +36,5 @@ urlpatterns = [
     path("getuser", UserAPIView.as_view(), name='user'),
     path("forgot_password", SendEmailView.as_view(), name='forgot_password'),
     path("bill", SendBillView.as_view(), name='bill'),
+    path('find-user-role/<str:email>/', FindUserRoleAPIView.as_view(), name='find-user-role'),
 ]
