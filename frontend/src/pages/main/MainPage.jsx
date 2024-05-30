@@ -200,10 +200,16 @@ export default function MainPage() {
                 <Swiper
                     className="swiper-container"
                     modules={[Navigation, A11y]}
-                    spaceBetween={1}
+                    spaceBetween={30}
                     centeredSlides={false}
                     navigation
                     breakpoints={{
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        220: {
+                            slidesPerView: 2
+                        },
                         300: {
                             slidesPerView: 3,
                         },
@@ -220,8 +226,20 @@ export default function MainPage() {
                             slidesPerView: 7,
                         },
                         1024: {
-                            slidesPerView: 9,
+                            slidesPerView: 5,
                         },
+                        1124: {
+                            slidesPerView: 5,
+                        },
+                        1450: {
+                            slidesPerView: 6,
+                        },
+                        1920: {
+                            slidesPerView: 8,
+                        },
+                        2000: {
+                            slidesPerView: 9,
+                        }
                     }}
                 >
                     {categories.map(category => (
@@ -290,7 +308,7 @@ export default function MainPage() {
             <Modal open={showModal} onClose={toggleModal}>
                 <div className={styles.popup}>
                     <div className={styles["popup-header"]}>
-                        <img className={styles["counter-image"]} src="../../../static/images/product.png"
+                        <img className={styles["counter-image"]} src={selectedProduct && selectedProduct.image_url}
                              alt="Fooddelivery"/>
                     </div>
                     <div className={styles["popup-body"]}>

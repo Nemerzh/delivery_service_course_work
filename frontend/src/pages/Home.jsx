@@ -76,7 +76,7 @@ export default function Home() {
                             slidesPerView: 1,
                         },
                         550: {
-                            slidesPerView: 1,
+                            slidesPerView: 2,
                         },
                         1024: {
                             slidesPerView: 2,
