@@ -5,7 +5,6 @@ from decouple import config
 load_dotenv()
 
 ALLOWED_IPS = config('ALLOWED_IPS').split(',')
-print(ALLOWED_IPS)
 
 class AdminIPRestrictionMiddleware:
     def __init__(self, get_response):
