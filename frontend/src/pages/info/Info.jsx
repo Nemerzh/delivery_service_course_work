@@ -13,8 +13,11 @@ export default function ContactPage() {
                 </div>
                 <div className={bannerStyles["banner-body"]}>
                     <a href={"/main"} className={`${bannerStyles["button-banner"]}`}>Меню</a>
-                    <a href={"/feedback/list"} className={`${bannerStyles["button-banner"]} ${styles["active"]}`}>Відгуки</a>
-                    <a href="#" className={`${bannerStyles["button-banner"]} ${bannerStyles["active"]}`}>Інфо</a>
+                    <div className={bannerStyles["banner-body"]}>
+                        <a href={"/main"} className={`${bannerStyles["button-banner"]}`}>Меню</a>
+                        <a href={"/feedback/list"} className={`${bannerStyles["button-banner"]}`}>Відгуки</a>
+                        <a href="#" className={`${bannerStyles["button-banner"]} ${bannerStyles["active"]}`}>Інфо</a>
+                    </div>
                 </div>
             </div>
 

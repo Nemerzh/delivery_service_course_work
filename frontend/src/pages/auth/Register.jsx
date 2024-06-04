@@ -8,6 +8,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import PhoneIcon from '@mui/icons-material/Phone';
 import HttpsIcon from '@mui/icons-material/Https';
 import '../../../static/css/register.css';
+import {toast} from "react-toastify";
 
 
 export default function Register() {
@@ -41,6 +42,16 @@ export default function Register() {
 
             window.location.href = '/auth/login';
         } catch (error) {
+            if (error.response.data.email) {
+                toast.error(error.response.data.email[0])
+            }
+            if (error.response.data.phone_number) {
+                console.log("1")
+                toast.error(error.response.data.phone_number[0])
+            }
+            if (error.response.data.password) {
+                toast.error(error.response.data.password)
+            }
             setLoading(false)
 
         }
@@ -151,7 +162,7 @@ export default function Register() {
                         </div>
                     </div>
                     <div className="sign-up-param">
-                        <button disabled={loading} className="sign-up-btn" type="submit">
+                        <button className="sign-up-btn" type="submit">
                             Sign up
                         </button>
                     </div>
