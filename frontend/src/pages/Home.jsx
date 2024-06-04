@@ -29,27 +29,6 @@ export default function Home() {
         fetchCategory();
     }, []); // Передача порожнього масиву як другого аргументу useEffect
 
-    // function calculateSlidesPerView() {
-    //     if (window.innerWidth < 550) {
-    //         return 1;
-    //     } else if (window.innerWidth < 1024) {
-    //         return 2;
-    //     } else if (window.innerWidth < 1300) {
-    //         return 3;
-    //     } else return 4;
-    // }
-    //
-    // window.addEventListener('load', () => {
-    //     let newSize = calculateSlidesPerView();
-    //     setSize(newSize);
-    // });
-    //
-    // window.addEventListener('resize', () => {
-    //     let newSize = calculateSlidesPerView();
-    //     setSize(newSize);
-    // });
-
-
     return (
         <div className="start-page-main-container">
             <div className="img-start-page">
